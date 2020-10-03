@@ -1,0 +1,500 @@
+package TestPackage;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.BeforeClass;
+
+import MainPackage.Home;
+
+import MainPackage.Search;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import io.cucumber.messages.internal.com.google.common.base.Enums;
+import io.cucumber.datatable.DataTable;
+
+public class SearchSteps {
+	
+
+	
+	ArrayList <Home> Homes=new ArrayList<Home>();
+	ArrayList <Home> Result=new ArrayList<Home>();
+	ArrayList <String> s=new ArrayList<String>();
+	Search S;
+	  String string=" ";
+	  int num=0;
+	  int num1=0;
+	 int num2=0;
+	
+	@Given ("these homes are contained in the system")
+public void thePriceOf(DataTable dt)
+	{
+	List<List<String>> list = dt.asLists();
+		
+		//System.out.println(list.get(0).get(0));
+		for(int i=0; i<list.size(); i++) {
+			String []key=list.get(i).get(0).split("_");
+			String []value=list.get(i).get(1).split("_");
+			Home home=new Home();
+			home.setType(key[0]);
+			home.setMaterial(key[1]);
+			home.setPlacement(key[2]);
+			home.setPets(key[3]);
+			home.setAmenties(key[4]);
+			home.setPrice(Integer.parseInt(value[0]));
+		    home.setArea(Integer.parseInt(value[1]));
+			home.setBedrooms(Integer.parseInt(value[2]));
+			home.setBathrooms(Integer.parseInt(value[3]));
+			home.setLeaselength(Integer.parseInt(value[4]));
+			Homes.add(home);
+	}
+		S=new Search(Homes);
+	}
+
+	@When("I search about home by {string}")
+	public void iSearchAboutHomeBy(String st)
+	{
+		string=st;
+		s.add(string);
+		  Result=S.iSearchAboutHomeWithString(s);
+		
+	}
+
+	@Then("A list of homes that matches the placement specification should be returned and printed on the console")
+	public void totalHomesPlacement()
+	{
+		if(string.equalsIgnoreCase("City")) {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getPlacement().equalsIgnoreCase(string));
+			  }
+	}
+		else if(string.equalsIgnoreCase("Village")) {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getPlacement().equalsIgnoreCase(string));
+			  }
+	}
+		System.out.println("All Homes = >");
+		System.out.println();
+		S.printRes(Homes);
+		System.out.println();
+		System.out.println("Placement filter =>"+"\n");
+		S.printRes(Result);
+		
+	}
+	
+	@Then("A list of homes that matches the material specification should be returned and printed on the console")
+	public void totalHomesMaterial()
+	{
+		System.out.println();
+		System.out.println("Material filter =>"+"\n");
+		if(string.equalsIgnoreCase("Brick")) {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getMaterial().equalsIgnoreCase(string));
+			  }
+		}
+		else if(string.equalsIgnoreCase("wood")) {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getMaterial().equalsIgnoreCase(string));
+			  }
+		}
+		else {
+			assertEquals(0,Result.size());
+			
+		}
+		S.printRes(Result);
+		
+	}
+	
+	@Then("A list of homes that matches the type specification should be returned and printed on the console")
+	public void totalHomesType()
+	{
+		System.out.println();
+		System.out.println("Type filter =>"+"\n");
+		if(string.equalsIgnoreCase("APARTMENT")) {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getType().equalsIgnoreCase(string));
+			  }
+		}
+		else {
+			assertEquals(1,Result.size());
+			 for(Home h:Result) {
+				  assertTrue(h.getType().equalsIgnoreCase(string));
+			  }
+		}
+		S.printRes(Result);
+		
+	}
+	
+	@When("I search about home with price less than {int}")
+	public void IsearchLessPrice(int Price)
+	{ num=Price;
+		   string=Price+" "+"price";
+		     s.add(string);
+		    Result= S.iSearchAboutHomeWithString(s);
+	}
+	
+	@When("I search about home with price more than {int} and less than {int}")
+	public void IsearchRangePrice(int LowerP,int UpperP)
+	{
+		num1=LowerP;
+		num2=UpperP;
+		s.add("priceBetween"+" "+LowerP+" "+UpperP);
+		Result= S.iSearchAboutHomeWithString(s);
+	
+	}
+	
+	@Then("A list of homes that matches the price specification should be returned and printed on the console")
+	public void totalHomesPrice()
+	{
+		System.out.println();
+		System.out.println("Price filter => "+"\n");
+		if(num1==0 && num2==0)
+		{if(num>510) {
+			assertEquals(2,Result.size());
+			for(Home h:Result) 
+				  assertTrue(h.getPrice()<num);
+		}
+		else if(num > 230) {
+			assertEquals(1,Result.size());
+			for(Home h:Result) 
+				  assertTrue(h.getPrice() < num);
+			}
+			else {
+				assertEquals(0,Result.size());
+				
+			}
+			 
+		}
+		
+		else if(num == 0) {
+			if(num1<510 && num2> 510 ) {
+				assertEquals(1,Result.size());
+				for(Home h:Result) 
+					  assertTrue(h.getPrice()<num2 && h.getPrice()>num1 );
+			}
+			else if(num1<230 && num2>230) {
+				if(num2 >510)
+				{assertEquals(2,Result.size());
+				for(Home h:Result) 
+					  assertTrue(h.getPrice() < num2 && h.getPrice()>num1);}
+				else {
+					{assertEquals(1,Result.size());
+					for(Home h:Result) 
+						  assertTrue(h.getPrice() < num2 && h.getPrice()>num1);}
+				}
+				}
+			}
+		else {
+			assertEquals(0,Result.size());
+		}
+				 
+		S.printRes(Result);
+		
+	}
+	
+	@When("I search about home with area less than {int}")
+	public void IsearchLessArea(int Area)
+	{      num=Area;
+		  string=Area+" "+"area";
+		     s.add(string);
+		   Result= S.iSearchAboutHomeWithString(s);
+	}
+	
+	@When("I search about home with area more than {int} and less than {int}")
+	public void IsearchRangeArea(int LowerA,int UpperA)
+	{
+		num1=LowerA;
+		num2=UpperA;
+		string="areaBetween"+" "+LowerA+" "+UpperA;
+		s.add(string);
+		Result= S.iSearchAboutHomeWithString(s);
+	
+	
+	}
+	
+	@Then("A list of homes that matches the area specification should be returned and printed on the console")
+	public void totalHomesArea()
+	{
+			System.out.println();
+			System.out.println("Area filter =>"+"\n");
+			if(num1==0 && num2==0)
+			{if(num>150) {
+				assertEquals(2,Result.size());
+				for(Home h:Result) 
+					  assertTrue(h.getArea()<num);
+			}
+			else if(num > 120) {
+				assertEquals(1,Result.size());
+				for(Home h:Result) 
+					  assertTrue(h.getArea() < num);}
+				else {
+					assertEquals(0,Result.size());
+					
+				}
+				 
+			}
+			
+			else if(num == 0) {
+				if(num1<150 && num2> 150 ) {
+					assertEquals(1,Result.size());
+					for(Home h:Result) 
+						  assertTrue(h.getArea()<num2 && h.getArea()>num1 );
+				}
+				else if(num1<120 && num2>120) {
+					if(num2 >150)
+					{assertEquals(2,Result.size());
+					for(Home h:Result) 
+						  assertTrue(h.getArea() < num2 && h.getArea()>num1);}
+					else {
+						{assertEquals(1,Result.size());
+						for(Home h:Result) 
+							  assertTrue(h.getArea() < num2 && h.getArea()>num1);}
+					}
+					}
+				}
+			else {
+				assertEquals(0,Result.size());
+			}
+					 
+			S.printRes(Result);
+			
+	}
+	
+
+	@When("I search about home with {int} Number of bedrooms")
+	public void iSearchAboutHomeWithNumberOfBedrooms(Integer int1) {
+		num=int1;
+		  string=int1+" "+"bedroom";
+		     s.add(string);
+		     Result= S.iSearchAboutHomeWithString(s);
+	}
+
+
+
+	@Then("A list of homes that matches the bedrooms specification should be returned and printed on the console")
+	public void aListOfHomesThatMatchesTheBedroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+		System.out.println();
+		System.out.println("Bedrooms filter =>"+"\n");
+		if(num==1) {
+			assertEquals(0,Result.size());
+			 
+		}
+		else if(num==2) {
+			assertEquals(0,Result.size());
+			 
+		}
+		else if(num==3) {
+			assertEquals(1,Result.size());
+			  for(Home h:Result) {
+				  assertTrue(h.getBedrooms()==3);
+			  }
+		}
+		else if(num==4) {
+			assertEquals(1,Result.size());
+			  for(Home h:Result) {
+				  assertTrue(h.getBedrooms()==4);
+			  }
+		}
+		else {
+			assertEquals(0,Result.size());
+			
+		}
+		S.printRes(Result);
+		
+		
+	}
+
+
+	
+
+		@When("I search about home with {int} Number of bathrooms")
+		public void iSearchAboutHomeWithNumberOfBathrooms(Integer int1) {
+			num=int1;
+			    string=int1+" "+"bathroom";
+    		     s.add(string);
+    		   Result= S.iSearchAboutHomeWithString(s);
+		}
+
+
+		
+
+		@Then("A list of homes that matches the bathrooms specification should be returned and printed on the console")
+		public void aListOfHomesThatMatchesTheBathroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+			System.out.println();
+			System.out.println("Bathrooms filter =>"+"\n");
+			if(num==1) {
+				assertEquals(0,Result.size());			 
+			}
+			else if(num==2) {
+				assertEquals(2,Result.size());
+				  for(Home h:Result) {
+					  assertTrue(h.getBathrooms()==2);
+				  }
+			}
+			else {
+				assertEquals(0,Result.size());
+				
+			}
+		
+			S.printRes(Result);
+		
+		
+		}
+
+		
+
+			@When("I search about home By {string} Allow Pets")
+			public void iSearchAboutHomeByAllowPets(String st) {
+				string=st;
+    			s.add(string);
+    		  Result=S.iSearchAboutHomeWithString(s);
+			}
+
+
+
+			@Then("A list of homes that matches the pets specification should be returned and printed on the console")
+			public void aListOfHomesThatMatchesThePetsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+				System.out.println();
+				System.out.println("Pets filter =>" + "\n");
+				if(string.equalsIgnoreCase("no")) {
+					assertEquals(2,Result.size());
+					 for(Home h:Result) {
+						  assertTrue(h.getPets().equalsIgnoreCase(string));
+					  }
+				}
+				else {
+					assertEquals(0,Result.size());
+					
+				}
+				S.printRes(Result);
+			
+			
+			}
+
+
+				@When("I search about home By {int} Lease Length")
+				public void iSearchAboutHomeByLeaseLength(Integer int1) {
+				        num=int1;
+					  string=int1+" "+"leaselength";
+	    		     s.add(string);
+	    		     Result= S.iSearchAboutHomeWithString(s);
+				}
+
+
+
+           @Then("A list of homes that matches the leaselength specification should be returned and printed on the console")
+				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+	            System.out.println();
+	            System.out.println("LeaseLength filter =>" +"\n");	
+	            if(num==6) {
+					assertEquals(1,Result.size());
+					  for(Home h:Result) {
+						  assertTrue(h.getLeaselength()==6);
+					  }
+				}
+				else {
+					assertEquals(1,Result.size());
+					  for(Home h:Result) {
+						  assertTrue(h.getLeaselength()==12);
+					  }
+				}
+	            S.printRes(Result);
+	           
+					
+				}
+
+					
+           @Then("A list of homes that matches the amenties specification should be returned and printed on the console")
+	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+	               System.out.println();
+	               System.out.println("Amenties filter =>"+"\n");
+	               if(string.equalsIgnoreCase("AirConditioning")) {
+						assertEquals(0,Result.size());
+						
+					}
+					else if(string.equalsIgnoreCase("Balcony")){
+						assertEquals(0,Result.size());
+						
+					}
+					else if(string.equalsIgnoreCase("Elevator")){
+						assertEquals(2,Result.size());
+						 for(Home h:Result) {
+							  assertTrue(h.getAmenties().contains(string.toUpperCase()));
+						  }
+					}
+					else if(string.equalsIgnoreCase("FirePlace")){
+						assertEquals(1,Result.size());
+						 for(Home h:Result) {
+							  assertTrue(h.getAmenties().contains(string.toUpperCase()));
+						  }
+					}
+					else if(string.equalsIgnoreCase("GarageParking")){
+						assertEquals(1,Result.size());
+						 for(Home h:Result) {
+							  assertTrue(h.getAmenties().contains(string.toUpperCase()));
+						  }
+					}
+					else if(string.equalsIgnoreCase("Swimming Pool")){
+						assertEquals(0,Result.size());
+						
+					}
+				
+	               S.printRes(Result);
+	              
+				}
+         
+           @Then("A list of homes that matches the multiple specification should be returned and printed on the console")
+           public void ListOfMulti() {
+           System.out.println();
+           System.out.println("Multiple filter =>"+"\n");
+           String s2=" ";
+           String []s1;
+         
+           for(Home h:Result) {
+        	  
+        	   s2=h.getAmenties()+h.getBathrooms()+" "+"bathroom"+h.getBedrooms()+" "+"bedroom"+h.getLeaselength()
+        	   +" "+"leaselength"+h.getMaterial()+h.getPets()+h.getPlacement()+h.getType();
+        	   for(String input:s) {
+        		 
+        		   if(input.contains("price")) {
+        			  
+        			  s1=input.split(" ");
+        			  if(s1.length==2) {
+        				
+        			   assertTrue(Integer.parseInt(s1[0])>h.getPrice()); 
+        			  }
+        			  else
+        				  assertTrue(Integer.parseInt(s1[1])<h.getPrice()&&h.getPrice()<Integer.parseInt(s1[2]));  
+        		   }
+        		   else if(input.contains("area")) {
+         			  s1=input.split(" ");
+         			  if(s1.length==2)
+           			   assertTrue(Integer.parseInt(s1[0])>h.getArea()); 
+           			  else
+           				  assertTrue(Integer.parseInt(s1[1])<h.getArea()&&h.getArea()<Integer.parseInt(s1[2]));
+         		   }
+        		   else
+            	   assertTrue(s2.toUpperCase().contains(input.toUpperCase())); 
+            		   
+            	   
+               }
+           }
+           S.printRes(Result);
+           Homes.clear();
+		   s.clear();
+		 
+		}
+
+	
+}	
