@@ -1,4 +1,4 @@
-package MainPackage;
+package mymain;
 
 public class Home {
 	private String type;

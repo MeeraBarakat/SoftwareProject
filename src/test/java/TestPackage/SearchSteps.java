@@ -3,26 +3,25 @@ package TestPackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.Console;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.junit.BeforeClass;
-
-import MainPackage.Home;
-
-import MainPackage.Search;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.internal.com.google.common.base.Enums;
+import mymain.Home;
+import mymain.Search;
 import io.cucumber.datatable.DataTable;
 
 public class SearchSteps {
-	
 
-	
 	ArrayList <Home> Homes=new ArrayList<Home>();
 	ArrayList <Home> Result=new ArrayList<Home>();
 	ArrayList <String> s=new ArrayList<String>();
@@ -30,14 +29,12 @@ public class SearchSteps {
 	  String string=" ";
 	  int num=0;
 	  int num1=0;
-	 int num2=0;
+	 int num2=0; 
 	
 	@Given ("these homes are contained in the system")
 public void thePriceOf(DataTable dt)
 	{
 	List<List<String>> list = dt.asLists();
-		
-		//System.out.println(list.get(0).get(0));
 		for(int i=0; i<list.size(); i++) {
 			String []key=list.get(i).get(0).split("_");
 			String []value=list.get(i).get(1).split("_");
@@ -62,7 +59,7 @@ public void thePriceOf(DataTable dt)
 	{
 		string=st;
 		s.add(string);
-		  Result=S.iSearchAboutHomeWithString(s);
+		  Result=S.searchStrings(s);
 		
 	}
 
@@ -141,7 +138,7 @@ public void thePriceOf(DataTable dt)
 	{ num=Price;
 		   string=Price+" "+"price";
 		     s.add(string);
-		    Result= S.iSearchAboutHomeWithString(s);
+		    Result= S.searchStrings(s);
 	}
 	
 	@When("I search about home with price more than {int} and less than {int}")
@@ -150,7 +147,7 @@ public void thePriceOf(DataTable dt)
 		num1=LowerP;
 		num2=UpperP;
 		s.add("priceBetween"+" "+LowerP+" "+UpperP);
-		Result= S.iSearchAboutHomeWithString(s);
+		Result= S.searchStrings(s);
 	
 	}
 	
@@ -208,7 +205,7 @@ public void thePriceOf(DataTable dt)
 	{      num=Area;
 		  string=Area+" "+"area";
 		     s.add(string);
-		   Result= S.iSearchAboutHomeWithString(s);
+		   Result= S.searchStrings(s);
 	}
 	
 	@When("I search about home with area more than {int} and less than {int}")
@@ -218,7 +215,7 @@ public void thePriceOf(DataTable dt)
 		num2=UpperA;
 		string="areaBetween"+" "+LowerA+" "+UpperA;
 		s.add(string);
-		Result= S.iSearchAboutHomeWithString(s);
+		Result= S.searchStrings(s);
 	
 	
 	}
@@ -277,7 +274,7 @@ public void thePriceOf(DataTable dt)
 		num=int1;
 		  string=int1+" "+"bedroom";
 		     s.add(string);
-		     Result= S.iSearchAboutHomeWithString(s);
+		     Result= S.searchStrings(s);
 	}
 
 
@@ -297,13 +294,13 @@ public void thePriceOf(DataTable dt)
 		else if(num==3) {
 			assertEquals(1,Result.size());
 			  for(Home h:Result) {
-				  assertTrue(h.getBedrooms()==3);
+				  assertEquals(3,h.getBedrooms());
 			  }
 		}
 		else if(num==4) {
 			assertEquals(1,Result.size());
 			  for(Home h:Result) {
-				  assertTrue(h.getBedrooms()==4);
+				  assertEquals(4,h.getBedrooms());
 			  }
 		}
 		else {
@@ -323,7 +320,7 @@ public void thePriceOf(DataTable dt)
 			num=int1;
 			    string=int1+" "+"bathroom";
     		     s.add(string);
-    		   Result= S.iSearchAboutHomeWithString(s);
+    		   Result= S.searchStrings(s);
 		}
 
 
@@ -339,7 +336,7 @@ public void thePriceOf(DataTable dt)
 			else if(num==2) {
 				assertEquals(2,Result.size());
 				  for(Home h:Result) {
-					  assertTrue(h.getBathrooms()==2);
+					  assertEquals(2,h.getBathrooms());
 				  }
 			}
 			else {
@@ -358,7 +355,7 @@ public void thePriceOf(DataTable dt)
 			public void iSearchAboutHomeByAllowPets(String st) {
 				string=st;
     			s.add(string);
-    		  Result=S.iSearchAboutHomeWithString(s);
+    		  Result=S.searchStrings(s);
 			}
 
 
@@ -388,7 +385,7 @@ public void thePriceOf(DataTable dt)
 				        num=int1;
 					  string=int1+" "+"leaselength";
 	    		     s.add(string);
-	    		     Result= S.iSearchAboutHomeWithString(s);
+	    		     Result= S.searchStrings(s);
 				}
 
 
@@ -400,13 +397,13 @@ public void thePriceOf(DataTable dt)
 	            if(num==6) {
 					assertEquals(1,Result.size());
 					  for(Home h:Result) {
-						  assertTrue(h.getLeaselength()==6);
+						  assertEquals(6,h.getLeaselength());
 					  }
 				}
 				else {
 					assertEquals(1,Result.size());
 					  for(Home h:Result) {
-						  assertTrue(h.getLeaselength()==12);
+						  assertEquals(12,h.getLeaselength());
 					  }
 				}
 	            S.printRes(Result);

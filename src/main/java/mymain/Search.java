@@ -1,4 +1,4 @@
-package MainPackage;
+package mymain;
 
 import java.util.ArrayList;
 
@@ -8,33 +8,34 @@ import java.util.ArrayList;
 public class Search {
 
 	enum Material {
-		Stone,Brick,Wood
+		STONE,BRICK,WOOD
 	}
 
 	enum Amenities{
-		AirConditioning, Balcony, Elevator, FirePlace, GarageParking,
-		SwimmingPool
+		AIRCONDITIONING, BALCONY, ELEVATOR, FIREPLACE,GARAGEPARKING,
+		SWIMMINGPOOL
 	}
 
 	enum type {
-		Apartment, house
+		APARTMENT, HOUSE
 	}
 
 	enum Placement {
-		City, Village
+		CITY,VILLAGE
 	}
 
 	enum LeaseLength {
-		shortterm_6months, longterm_year
+		SHORTTERM_6MONTHS,LONGTERM_YEAR
 	}
 	
 	enum Pets {
-		Yes,No
+		YES,NO
 	}
-	ArrayList <Home> Homes;
-	ArrayList <Home> Result=new ArrayList<Home>();
-   public Search(ArrayList <Home> H){
-		Homes=H;
+	ArrayList <Home> homes;
+	ArrayList <Home> result=new ArrayList<>();
+	public static final boolean PFLAG=false;
+   public Search(ArrayList <Home> house){
+		homes=house;
 	}
 	public void printRes(ArrayList <Home> myResult) {
 		String res;
@@ -46,9 +47,9 @@ public class Search {
 		}
 		
 	}
-	public ArrayList <Home> iSearchAboutHomeWithString(	ArrayList <String> S) {
+	public ArrayList <Home> searchStrings(	ArrayList <String> sHome) {
 		
-		Result.clear();
+		result.clear();
 			boolean flag=true;
 			String typ = null;
 			String mater=null;
@@ -58,13 +59,13 @@ public class Search {
 			int bed=0;
 			int bath=0;
 			int ll=0;
-			int p=0;
+			int pri=0;
 			int area=0;
 			int area1=0;
 			int area2=0;
 			int price1=0;
 			int price2=0;
-				for(String s: S)
+				for(String s: sHome)
 				{
 			String []num=s.split(" ");
 			if(num.length==2) {
@@ -75,7 +76,7 @@ public class Search {
 			  else if(num[1].equalsIgnoreCase("area"))
 				   area=Integer.parseInt(num[0]);
 			  else if(num[1].equalsIgnoreCase("price"))
-				  p=Integer.parseInt(num[0]);
+				  pri=Integer.parseInt(num[0]);
 			  else if(num[1].equalsIgnoreCase("LeaseLength"))
 				  ll=Integer.parseInt(num[0]);
 			  
@@ -97,7 +98,7 @@ public class Search {
 					
 				 for(Material m:Material.values())
 						if(s.equalsIgnoreCase(m.toString()))
-					mater=m.toString();
+					      mater=m.toString();
 					
 					for(Placement m:Placement.values())
 						if(s.equalsIgnoreCase(m.toString()))
@@ -109,75 +110,44 @@ public class Search {
 					
 					for(Pets m:Pets.values())
 						if(s.equalsIgnoreCase(m.toString()))
-					pet=m.toString();
+					       pet=m.toString();
 			  }
 				}
 				
-				for(Home h:Homes)
+				for(Home h:homes)
 				{
 					flag=true;
-					if(typ != null)
-						if(! (h.getType().equalsIgnoreCase(typ)))
-							{
+					if(typ != null && !(h.getType().equalsIgnoreCase(typ)))
 							flag=false;
-							}
-					if(mater != null)
-						if(!( h.getMaterial().equalsIgnoreCase(mater)))
-							{
+					if(mater != null && !( h.getMaterial().equalsIgnoreCase(mater)))
 							flag=false;
-							}
-					if(place != null)
-						if(! (h.getPlacement().equalsIgnoreCase(place)))
-							{
+					if(place != null && ! (h.getPlacement().equalsIgnoreCase(place)))
 							flag=false;
-							}
-					if(ami != null)
-						if((! h.getAmenties().toUpperCase().contains(ami.toUpperCase())))
-							{
+					if(ami != null && ! (h.getAmenties().toUpperCase().contains(ami.toUpperCase())))
+							flag=false;		
+					if(pet != null && ! (h.getPets().equalsIgnoreCase(pet)))
 							flag=false;
-							
-							}
-					if(pet != null)
-						if(! (h.getPets().equalsIgnoreCase(pet)))
-							{
+					if(bed!=0 &&h.getBedrooms()!=bed)
 							flag=false;
-							}
-					if(bed!=0)
-						if(! (h.getBedrooms()==bed)) {
+					if(bath!=0 && h.getBathrooms()!=bath)
 							flag=false;
-						}
-					if(bath!=0)
-						if(! (h.getBathrooms()==bath)) {
+					if(ll!=0 && h.getLeaselength()!=ll)
 							flag=false;
-						}
-					if(ll!=0)
-						if(! (h.getLeaselength()==ll)) {
+					if(pri!=0 && h.getPrice()>=pri)
 							flag=false;
-						}
-					if(p!=0)
-						if(! (h.getPrice()<p)) {
+					if(area!=0 && h.getArea()>=area)
 							flag=false;
-						}
-					if(area!=0)
-						if(! (h.getArea()<area)) {
+					if(area1 !=0 && ! (h.getArea()<area2 && h.getArea()>area1))
 							flag=false;
-						}
-					if(area1 !=0)
-						if(! (h.getArea()<area2 && h.getArea()>area1)) {
+					if(price1 !=0 && ! (h.getPrice()<price2 && h.getPrice()>price1))
 							flag=false;
-						}
-					
-					if(price1 !=0)
-						if(! (h.getPrice()<price2 && h.getPrice()>price1)) {
-							flag=false;
-						} 
-					if(flag == true) {
+					if(flag) {
 						
-						Result.add(h);
+						result.add(h);
 						
 					}
 				}
-			return Result;	
+			return result;	
 		}
 	
 
