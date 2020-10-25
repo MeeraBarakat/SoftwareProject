@@ -17,4 +17,3 @@ plugin= {"html:target/cucumber/wikipedia.html"},
 public class AcceptanceTest {
 
 }
-// blah blah les's see meera
