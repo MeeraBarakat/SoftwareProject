@@ -14,7 +14,7 @@ Examples:
 |"Village"|
 
 Scenario Outline: Search home by material
-When I search about home by <Material>
+When I search about home by <Material> material
 Then A list of homes that matches the material specification should be returned and printed on the console
 Examples:
 |Material|
@@ -22,25 +22,36 @@ Examples:
 |"Brick"|
 |"Wood"|
 
-Scenario: Search about home with less than a specific price
-When I search about home with price less than 400
+Scenario Outline: Search about home with less than a specific price
+When I search about home with price less than <price>
 Then A list of homes that matches the price specification should be returned and printed on the console
+Examples:
+|price|
+|520|
+|240|
+|20|
 
 Scenario: Search home by range of prices
 When I search about home with price more than 300 and less than 600
 Then A list of homes that matches the price specification should be returned and printed on the console
 
-Scenario: Search about home with less than a specific area
-When I search about home with area less than 140
+Scenario Outline: Search about home with less than a specific area
+When I search about home with area less than <area>
 Then A list of homes that matches the area specification should be returned and printed on the console
+Examples:
+|area|
+|160|
+|130|
+|20|
 
 Scenario: Search home by range of areas 
 When I search about home with area more than 140 and less than 170
 Then A list of homes that matches the area specification should be returned and printed on the console
 
 Scenario Outline: Search home by type
-When I search about home by <type>
+When I search about home by <type> type
 Then A list of homes that matches the type specification should be returned and printed on the console
+
 Examples:
 |type|
 |"HOUSE"|
@@ -83,8 +94,8 @@ Then A list of homes that matches the leaselength specification should be return
   |12|
   
 Scenario Outline: Search about home by amenties
-When I search about home by <amenties>  
-Then A list of homes that matches the amenties specification should be returned and printed on the console 
+When I search about home by <amenties> amenties  
+Then A list of homes that matches the amenties specification should be returned and printed on the console
       Examples:
   |amenties|
   |"GARAGEPARKING"|
@@ -93,18 +104,3 @@ Then A list of homes that matches the amenties specification should be returned 
   |"AirConditioning"|
   |"Balcony"|
   |"SwimmingPool"|
- 
-Scenario: Search about home using MultiSpec
-When I search about home by "HOUSE"
-And I search about home by "wood"
-And I search about home By "NO" Allow Pets 
-And I search about home by "ELEVATOR" 
-And  I search about home by "village"
-And I search about home with 3 Number of bedrooms 
-And I search about home with 2 Number of bathrooms
-And I search about home By 6 Lease Length
-And I search about home with price less than 520 
-#And I search about home with area less than 160   
-#And I search about home with price more than 140 and less than 600
-And I search about home with area more than 145 and less than 200
-Then A list of homes that matches the multiple specification should be returned and printed on the console

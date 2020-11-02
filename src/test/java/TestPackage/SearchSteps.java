@@ -21,15 +21,13 @@ import mymain.Search;
 import io.cucumber.datatable.DataTable;
 
 public class SearchSteps {
-
 	ArrayList <Home> Homes=new ArrayList<Home>();
-	ArrayList <Home> Result=new ArrayList<Home>();
-	ArrayList <String> s=new ArrayList<String>();
+	List <Home> Result=new ArrayList<Home>();
 	Search S;
 	  String string=" ";
 	  int num=0;
 	  int num1=0;
-	 int num2=0; 
+	  int num2=0; 
 	
 	@Given ("these homes are contained in the system")
 public void thePriceOf(DataTable dt)
@@ -54,13 +52,33 @@ public void thePriceOf(DataTable dt)
 		S=new Search(Homes);
 	}
 
+	@When("I search about home by {string} amenties")
+	public void iSearchAboutHomeByamenties(String st)
+	{
+		  string=st;
+		  Result=S.byamenties(st);
+		
+}
 	@When("I search about home by {string}")
 	public void iSearchAboutHomeBy(String st)
 	{
-		string=st;
-		s.add(string);
-		  Result=S.searchStrings(s);
+		  string=st;
+		  Result=S.byplacement(st);
 		
+	}
+
+	@When("I search about home by {string} material")
+	public void iSearchAboutHomeBymaterial(String st)
+	{
+		  string=st;
+		  Result=S.bymaterial(st);
+		
+	}
+	@When("I search about home by {string} type")
+	public void iSearchAboutHomeBytype(String st)
+	{
+		  string=st;
+		  Result=S.bytype(st);
 	}
 
 	@Then("A list of homes that matches the placement specification should be returned and printed on the console")
@@ -135,10 +153,9 @@ public void thePriceOf(DataTable dt)
 	
 	@When("I search about home with price less than {int}")
 	public void IsearchLessPrice(int Price)
-	{ num=Price;
-		   string=Price+" "+"price";
-		     s.add(string);
-		    Result= S.searchStrings(s);
+	{ 
+		    num=Price;
+		    Result=S.byPriceLess(Price);
 	}
 	
 	@When("I search about home with price more than {int} and less than {int}")
@@ -146,8 +163,7 @@ public void thePriceOf(DataTable dt)
 	{
 		num1=LowerP;
 		num2=UpperP;
-		s.add("priceBetween"+" "+LowerP+" "+UpperP);
-		Result= S.searchStrings(s);
+		Result= S.byPriceBetween(LowerP, UpperP);
 	
 	}
 	
@@ -203,9 +219,7 @@ public void thePriceOf(DataTable dt)
 	@When("I search about home with area less than {int}")
 	public void IsearchLessArea(int Area)
 	{      num=Area;
-		  string=Area+" "+"area";
-		     s.add(string);
-		   Result= S.searchStrings(s);
+		   Result= S.byAreaLess(Area);
 	}
 	
 	@When("I search about home with area more than {int} and less than {int}")
@@ -213,11 +227,7 @@ public void thePriceOf(DataTable dt)
 	{
 		num1=LowerA;
 		num2=UpperA;
-		string="areaBetween"+" "+LowerA+" "+UpperA;
-		s.add(string);
-		Result= S.searchStrings(s);
-	
-	
+		Result= S.byAreaBetween(LowerA, UpperA);
 	}
 	
 	@Then("A list of homes that matches the area specification should be returned and printed on the console")
@@ -226,7 +236,8 @@ public void thePriceOf(DataTable dt)
 			System.out.println();
 			System.out.println("Area filter =>"+"\n");
 			if(num1==0 && num2==0)
-			{if(num>150) {
+			{
+				if(num>150) {
 				assertEquals(2,Result.size());
 				for(Home h:Result) 
 					  assertTrue(h.getArea()<num);
@@ -270,11 +281,9 @@ public void thePriceOf(DataTable dt)
 	
 
 	@When("I search about home with {int} Number of bedrooms")
-	public void iSearchAboutHomeWithNumberOfBedrooms(Integer int1) {
-		num=int1;
-		  string=int1+" "+"bedroom";
-		     s.add(string);
-		     Result= S.searchStrings(s);
+	public void iSearchAboutHomeWithNumberOfBedrooms(Integer bedrooms) {
+		     num=bedrooms;
+		     Result= S.byBedrooms(bedrooms);
 	}
 
 
@@ -316,11 +325,9 @@ public void thePriceOf(DataTable dt)
 	
 
 		@When("I search about home with {int} Number of bathrooms")
-		public void iSearchAboutHomeWithNumberOfBathrooms(Integer int1) {
-			num=int1;
-			    string=int1+" "+"bathroom";
-    		     s.add(string);
-    		   Result= S.searchStrings(s);
+		public void iSearchAboutHomeWithNumberOfBathrooms(Integer bathrooms) {
+			num=bathrooms;
+    		   Result= S.byBathrooms(bathrooms);
 		}
 
 
@@ -352,10 +359,9 @@ public void thePriceOf(DataTable dt)
 		
 
 			@When("I search about home By {string} Allow Pets")
-			public void iSearchAboutHomeByAllowPets(String st) {
-				string=st;
-    			s.add(string);
-    		  Result=S.searchStrings(s);
+			public void iSearchAboutHomeByAllowPets(String pets) {
+				string=pets;
+    		  Result=S.byPets(pets);
 			}
 
 
@@ -381,11 +387,9 @@ public void thePriceOf(DataTable dt)
 
 
 				@When("I search about home By {int} Lease Length")
-				public void iSearchAboutHomeByLeaseLength(Integer int1) {
-				        num=int1;
-					  string=int1+" "+"leaselength";
-	    		     s.add(string);
-	    		     Result= S.searchStrings(s);
+				public void iSearchAboutHomeByLeaseLength(Integer lease) {
+				        num=lease;
+	    		     Result= S.byLeaseLength(lease);
 				}
 
 
@@ -442,7 +446,7 @@ public void thePriceOf(DataTable dt)
 							  assertTrue(h.getAmenties().contains(string.toUpperCase()));
 						  }
 					}
-					else if(string.equalsIgnoreCase("Swimming Pool")){
+					else if(string.equalsIgnoreCase("SwimmingPool")){
 						assertEquals(0,Result.size());
 						
 					}
@@ -451,47 +455,6 @@ public void thePriceOf(DataTable dt)
 	              
 				}
          
-           @Then("A list of homes that matches the multiple specification should be returned and printed on the console")
-           public void ListOfMulti() {
-           System.out.println();
-           System.out.println("Multiple filter =>"+"\n");
-           String s2=" ";
-           String []s1;
-         
-           for(Home h:Result) {
-        	  
-        	   s2=h.getAmenties()+h.getBathrooms()+" "+"bathroom"+h.getBedrooms()+" "+"bedroom"+h.getLeaselength()
-        	   +" "+"leaselength"+h.getMaterial()+h.getPets()+h.getPlacement()+h.getType();
-        	   for(String input:s) {
-        		 
-        		   if(input.contains("price")) {
-        			  
-        			  s1=input.split(" ");
-        			  if(s1.length==2) {
-        				
-        			   assertTrue(Integer.parseInt(s1[0])>h.getPrice()); 
-        			  }
-        			  else
-        				  assertTrue(Integer.parseInt(s1[1])<h.getPrice()&&h.getPrice()<Integer.parseInt(s1[2]));  
-        		   }
-        		   else if(input.contains("area")) {
-         			  s1=input.split(" ");
-         			  if(s1.length==2)
-           			   assertTrue(Integer.parseInt(s1[0])>h.getArea()); 
-           			  else
-           				  assertTrue(Integer.parseInt(s1[1])<h.getArea()&&h.getArea()<Integer.parseInt(s1[2]));
-         		   }
-        		   else
-            	   assertTrue(s2.toUpperCase().contains(input.toUpperCase())); 
-            		   
-            	   
-               }
-           }
-           S.printRes(Result);
-           Homes.clear();
-		   s.clear();
-		 
-		}
-
+           
 	
 }	
