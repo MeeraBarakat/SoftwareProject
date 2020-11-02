@@ -191,7 +191,7 @@ public void thePriceOf(DataTable dt)
 		}
 		
 		else if(num == 0) {
-			if(num1<510 && num2> 510 ) {
+			if(num1<510 && num2> 510 && num1>230) {
 				assertEquals(1,Result.size());
 				for(Home h:Result) 
 					  assertTrue(h.getPrice()<num2 && h.getPrice()>num1 );
@@ -207,11 +207,11 @@ public void thePriceOf(DataTable dt)
 						  assertTrue(h.getPrice() < num2 && h.getPrice()>num1);}
 				}
 				}
-			}
+			
 		else {
 			assertEquals(0,Result.size());
 		}
-				 
+		}	 
 		S.printRes(Result);
 		
 	}
@@ -254,7 +254,7 @@ public void thePriceOf(DataTable dt)
 			}
 			
 			else if(num == 0) {
-				if(num1<150 && num2> 150 ) {
+				if(num1<150 && num2> 150 && num1>120) {
 					assertEquals(1,Result.size());
 					for(Home h:Result) 
 						  assertTrue(h.getArea()<num2 && h.getArea()>num1 );
@@ -270,9 +270,10 @@ public void thePriceOf(DataTable dt)
 							  assertTrue(h.getArea() < num2 && h.getArea()>num1);}
 					}
 					}
-				}
+				
 			else {
 				assertEquals(0,Result.size());
+			}
 			}
 					 
 			S.printRes(Result);

@@ -31,10 +31,16 @@ Examples:
 |240|
 |20|
 
-Scenario: Search home by range of prices
-When I search about home with price more than 300 and less than 600
+Scenario Outline: Search home by range of prices
+When I search about home with price more than <price1> and less than <price2>
 Then A list of homes that matches the price specification should be returned and printed on the console
-
+  Examples:
+  |price1|price2|
+  |210   |520  |
+  |210   |240  |
+  |500   |520  |
+  |20    |20   |
+  
 Scenario Outline: Search about home with less than a specific area
 When I search about home with area less than <area>
 Then A list of homes that matches the area specification should be returned and printed on the console
@@ -44,9 +50,16 @@ Examples:
 |130|
 |20|
 
-Scenario: Search home by range of areas 
-When I search about home with area more than 140 and less than 170
+Scenario Outline: Search home by range of areas 
+When I search about home with area more than <area1> and less than <area2>
 Then A list of homes that matches the area specification should be returned and printed on the console
+  
+  Examples:
+  |area1|area2|
+  |100  |200  |
+  |90   |130  |
+  |140  |180  |
+  |20   |20   |
 
 Scenario Outline: Search home by type
 When I search about home by <type> type
