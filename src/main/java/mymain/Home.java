@@ -91,7 +91,5 @@ public class Home {
 	public void setLeaselength(int ll) {
 		leaselength=ll;
 	}
-	  public String toString() { 
-return "\nType:"+type+"\nMaterial:"+material+"\nPacement:"+placement+"\nAllow Pets:"+pets+"\nAmenties:"+amenties+"\nPrice:"+price+"\nArea:"+area+"\nBedrooms:"+bedrooms+"\nBathrooms:"+bathrooms+"\nleaselenght:"+leaselength ;
-	    } 
+
 }

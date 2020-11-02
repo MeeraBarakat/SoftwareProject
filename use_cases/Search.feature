@@ -5,14 +5,22 @@ Given  these homes are contained in the system
            
             |HOUSE_WOOD_VILLAGE_NO_GARAGEPARKING,FIREPLACE,ELEVATOR|510_150_3_2_6|
             |APARTMENT_BRICK_CITY_NO_ELEVATOR|230_120_4_2_12|         
-Scenario: Search home by placement
-When I search about home by "City"
+Scenario Outline: Search home by placement
+When I search about home by <placement>
 Then A list of homes that matches the placement specification should be returned and printed on the console
+Examples:
+|placement|
+|"City"|
+|"Village"|
 
-
-Scenario: Search home by material
-When I search about home by "Brick"
+Scenario Outline: Search home by material
+When I search about home by <Material>
 Then A list of homes that matches the material specification should be returned and printed on the console
+Examples:
+|Material|
+|"Stone"|
+|"Brick"|
+|"Wood"|
 
 Scenario: Search about home with less than a specific price
 When I search about home with price less than 400
@@ -30,35 +38,61 @@ Scenario: Search home by range of areas
 When I search about home with area more than 140 and less than 170
 Then A list of homes that matches the area specification should be returned and printed on the console
 
-Scenario: Search home by type
-When I search about home by "HOUSE"
+Scenario Outline: Search home by type
+When I search about home by <type>
 Then A list of homes that matches the type specification should be returned and printed on the console
+Examples:
+|type|
+|"HOUSE"|
+|"APARTMENT"|
 
-
-Scenario: Search about home By Number of bedrooms
-When I search about home with 4 Number of bedrooms 
+Scenario Outline: Search about home By Number of bedrooms
+When I search about home with <bedrooms> Number of bedrooms 
 Then A list of homes that matches the bedrooms specification should be returned and printed on the console 
-    
+      Examples:
+  |bedrooms|
+  |1|
+  |2|
+  |3|
+  |4|
+  |5|
  
-Scenario: Search about home By Number of bathrooms
-When I search about home with 2 Number of bathrooms
+Scenario Outline: Search about home By Number of bathrooms
+When I search about home with <bathrooms> Number of bathrooms
 Then A list of homes that matches the bathrooms specification should be returned and printed on the console 
-    
+    Examples:
+  |bathrooms|
+  |1|
+  |2|
+  |3|
  
-Scenario: Search about home By Allow Pets
-When I search about home By "NO" Allow Pets
+Scenario Outline: Search about home By Allow Pets
+When I search about home By <pets> Allow Pets
 Then A list of homes that matches the pets specification should be returned and printed on the console 
-    
+    Examples:
+  |pets|
+  |"NO"|
+  |"Yes"| 
  
-Scenario: Search about home By Lease Length
-When I search about home By 6 Lease Length
+Scenario Outline: Search about home By Lease Length
+When I search about home By <leaselength> Lease Length
 Then A list of homes that matches the leaselength specification should be returned and printed on the console 
-    
+     Examples:
+  |leaselength|
+  |6|
+  |12|
   
-Scenario: Search about home by amenties
-When I search about home by "ELEVATOR"  
+Scenario Outline: Search about home by amenties
+When I search about home by <amenties>  
 Then A list of homes that matches the amenties specification should be returned and printed on the console 
-    
+      Examples:
+  |amenties|
+  |"GARAGEPARKING"|
+  |"FIREPLACE"|
+  |"ELEVATOR"|
+  |"AirConditioning"|
+  |"Balcony"|
+  |"SwimmingPool"|
  
 Scenario: Search about home using MultiSpec
 When I search about home by "HOUSE"
