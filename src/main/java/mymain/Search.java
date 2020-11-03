@@ -31,52 +31,41 @@ public class Search {
 		
 	}
 	public List<Home> byplacement(String placement) {
-		Found_home=new ArrayList<Home>();
-		Iterator<Home> homes=repository.iterator();
-		while(homes.hasNext()) {
-			Home home=homes.next();
-			if(home.getPlacement().equalsIgnoreCase(placement))
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new ByPlacementSpec(placement);
+		HomeSearch(spec);
 		return Found_home ;
 	}
-	
 	public List<Home> bymaterial(String material) {
-		Found_home=new ArrayList<Home>();
-		Iterator<Home> homes=repository.iterator();
-		while(homes.hasNext()) {
-			Home home=homes.next();
-		if(home.getMaterial().equalsIgnoreCase(material)) {
-				Found_home.add(home);
-				
-			}
-		}
+		GeneralSpec spec=new ByMaterialSpec(material);
+		HomeSearch(spec);
 		return Found_home ;
 	}
-	
 	public List<Home> bytype(String type) {
-		Found_home=new ArrayList<Home>();
-		Iterator<Home> homes=repository.iterator();
-		while(homes.hasNext()) {
-			Home home=homes.next();
-		if(home.getType().equalsIgnoreCase(type)) {
-				Found_home.add(home);
-				
-			}
-		}
+		GeneralSpec spec=new ByTypeSpec(type);
+		HomeSearch(spec);
 		return Found_home ;
 	}
-	
 	public List<Home> byamenties(String amentie) {
-		Found_home=new ArrayList<Home>();
-		Iterator<Home> homes=repository.iterator();
-		while(homes.hasNext()) {
-			Home home=homes.next();
-		if(home.getAmenties().contains(amentie)) {
-				Found_home.add(home);
-			}
-		}
+		GeneralSpec spec=new ByAmentiesSpec(amentie);
+		HomeSearch(spec);
 		return Found_home ;
+	}
+	public List <Home> byAreaBetween(int area1,int area2)
+	{
+		GeneralSpec spec=new ByAreaBetweenSpec( area1, area2);
+		HomeSearch(spec);
+		return Found_home;
+		
+	}
+	public void HomeSearch(GeneralSpec spec) {
+		Found_home=new ArrayList<Home>();
+		Iterator <Home> Homes=repository.iterator();
+		while(Homes.hasNext())
+		{
+			Home home=Homes.next();
+			if(spec.isSpecMatched(home) )
+				Found_home.add(home);
+		}
 	}
 	
 	public List <Home> byPriceLess(int price)
@@ -121,19 +110,6 @@ public class Search {
 		
 	}
 	
-	public List <Home> byAreaBetween(int area1,int area2)
-	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getArea() < area2 && home.getArea() > area1)
-				Found_home.add(home);
-		}
-		return Found_home;
-		
-	}
 	
 	public List <Home> byBathrooms(int bathrooms)
 	{
