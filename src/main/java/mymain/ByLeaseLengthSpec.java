@@ -2,16 +2,16 @@ package mymain;
 
 public class ByLeaseLengthSpec implements GeneralSpec {
 
-		private int Lease;
+		private int lease;
 
-		public ByLeaseLengthSpec(int Lease) {
-			this.Lease = Lease;
+		public ByLeaseLengthSpec(int lease) {
+			this.lease = lease;
 		}
 
 
 
 		public int getLease() {
-			return Lease;
+			return lease;
 		}
 
 
