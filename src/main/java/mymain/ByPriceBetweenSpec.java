@@ -9,7 +9,6 @@ public class ByPriceBetweenSpec implements GeneralSpec {
 		public ByPriceBetweenSpec(int price1, int price2) {
 			this.price1 = price1;
 			this.price2 = price2;
-			// TODO Auto-generated constructor stub
 		}
 
 	

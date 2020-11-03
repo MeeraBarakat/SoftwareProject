@@ -6,7 +6,6 @@ public class byLeaseLengthSpec implements GeneralSpec {
 
 		public byLeaseLengthSpec(int Lease) {
 			this.Lease = Lease;
-			// TODO Auto-generated constructor stub
 		}
 
 

@@ -8,7 +8,6 @@ public class ByAreaBetweenSpec implements GeneralSpec {
 	public ByAreaBetweenSpec(int area1, int area2) {
 		this.area1 = area1;
 		this.area2 = area2;
-		// TODO Auto-generated constructor stub
 	}
 
 	

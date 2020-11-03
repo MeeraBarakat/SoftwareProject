@@ -6,7 +6,6 @@ public class ByAreaLessSpec implements GeneralSpec {
 
 			public ByAreaLessSpec(int area) {
 				this.area = area;
-				// TODO Auto-generated constructor stub
 			}
 
 			public int getArea() {

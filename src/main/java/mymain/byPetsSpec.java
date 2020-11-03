@@ -6,7 +6,6 @@ public class byPetsSpec implements GeneralSpec {
 
 		public byPetsSpec(String Pets) {
 			this.Pets = Pets;
-			// TODO Auto-generated constructor stub
 		}
 
 

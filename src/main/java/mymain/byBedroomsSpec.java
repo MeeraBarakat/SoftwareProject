@@ -5,7 +5,6 @@ public class byBedroomsSpec implements GeneralSpec {
 
 	public byBedroomsSpec(int bedrooms) {
 		this.bedrooms = bedrooms;
-		// TODO Auto-generated constructor stub
 	}
 
 

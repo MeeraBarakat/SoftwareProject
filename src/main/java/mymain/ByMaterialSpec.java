@@ -6,7 +6,6 @@ public class ByMaterialSpec implements GeneralSpec {
 
 	public ByMaterialSpec(String material) {
 		this.material = material;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getMaterial() {

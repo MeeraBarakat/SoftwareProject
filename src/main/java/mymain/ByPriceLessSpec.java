@@ -7,7 +7,6 @@ public class ByPriceLessSpec implements GeneralSpec {
 
 		public ByPriceLessSpec(int price) {
 			this.price = price;
-			// TODO Auto-generated constructor stub
 		}
 
 		public int getPrice() {

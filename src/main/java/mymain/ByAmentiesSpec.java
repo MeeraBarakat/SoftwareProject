@@ -6,7 +6,6 @@ public class ByAmentiesSpec implements GeneralSpec {
 
 	public ByAmentiesSpec(String amentie) {
 		this.amentie = amentie;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getAmentie() {

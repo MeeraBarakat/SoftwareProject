@@ -7,14 +7,15 @@ import java.util.List;
 
 
 public class Search {
-	List <Home> repository=new ArrayList<Home>();
-	private ArrayList <Home> Found_home;
-	ArrayList <Home> homes;
+	List <Home> repository=new ArrayList<>();
+	private ArrayList <Home> foundHome;
+	List <Home> homes;
 	ArrayList <Home> result=new ArrayList<>();
+	GeneralSpec spec;
 	public static final boolean PFLAG=false;
 	
 	
-   public Search(ArrayList <Home> house){
+   public Search(List <Home> house){
 		homes=house;
 		repository=house;
 	}
@@ -31,99 +32,99 @@ public class Search {
 		
 	}
 	public List<Home> byplacement(String placement) {
-		GeneralSpec spec=new ByPlacementSpec(placement);
-		HomeSearch(spec);
-		return Found_home ;
+		spec=new ByPlacementSpec(placement);
+		homeSearch(spec);
+		return foundHome ;
 	}
 	public List<Home> bymaterial(String material) {
-		GeneralSpec spec=new ByMaterialSpec(material);
-		HomeSearch(spec);
-		return Found_home ;
+		spec=new ByMaterialSpec(material);
+		homeSearch(spec);
+		return foundHome ;
 	}
 	public List<Home> bytype(String type) {
-		GeneralSpec spec=new ByTypeSpec(type);
-		HomeSearch(spec);
-		return Found_home ;
+		spec=new ByTypeSpec(type);
+		homeSearch(spec);
+		return foundHome ;
 	}
 	public List<Home> byamenties(String amentie) {
-		GeneralSpec spec=new ByAmentiesSpec(amentie);
-		HomeSearch(spec);
-		return Found_home ;
+		spec=new ByAmentiesSpec(amentie);
+		homeSearch(spec);
+		return foundHome ;
 	}
 	public List <Home> byAreaBetween(int area1,int area2)
 	{
-		GeneralSpec spec=new ByAreaBetweenSpec( area1, area2);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new ByAreaBetweenSpec( area1, area2);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
-	public void HomeSearch(GeneralSpec spec) {
-		Found_home=new ArrayList<Home>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
+	public void homeSearch(GeneralSpec spec) {
+		foundHome=new ArrayList<>();
+		Iterator <Home> homes=repository.iterator();
+		while(homes.hasNext())
 		{
-			Home home=Homes.next();
+			Home home=homes.next();
 			if(spec.isSpecMatched(home) )
-				Found_home.add(home);
+				foundHome.add(home);
 		}
 	}
 	
 	public List <Home> byPriceBetween(int area1,int area2)
 	{
-		GeneralSpec spec=new ByPriceBetweenSpec( area1, area2);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new ByPriceBetweenSpec( area1, area2);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	
 	public List <Home> byPriceLess(int price)
 	{
-		GeneralSpec spec=new ByPriceLessSpec(price);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new ByPriceLessSpec(price);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	
 	
 	public List <Home> byAreaLess(int area)
 	{
-		GeneralSpec spec=new ByAreaLessSpec(area);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new ByAreaLessSpec(area);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	
 	
 		public List <Home> byBathrooms(int area)
 		{
-			GeneralSpec spec=new byBathroomsSpec(area);
-			HomeSearch(spec);
-			return Found_home;
+			spec=new byBathroomsSpec(area);
+			homeSearch(spec);
+			return foundHome;
 			
 		}
 		
 	
 	public List <Home> byBedrooms(int bedrooms)
 	{
-		GeneralSpec spec=new byBedroomsSpec(bedrooms);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new byBedroomsSpec(bedrooms);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	
-	public List <Home> byPets(String Pets)
+	public List <Home> byPets(String pets)
 	{
-		GeneralSpec spec=new byPetsSpec(Pets);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new byPetsSpec(pets);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	
-	public List <Home> byLeaseLength(int Lease)
+	public List <Home> byLeaseLength(int lease)
 	{
-		GeneralSpec spec=new byLeaseLengthSpec(Lease);
-		HomeSearch(spec);
-		return Found_home;
+		spec=new byLeaseLengthSpec(lease);
+		homeSearch(spec);
+		return foundHome;
 		
 	}
 	

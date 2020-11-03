@@ -6,7 +6,6 @@ public class ByPlacementSpec implements GeneralSpec {
 
 	public ByPlacementSpec(String placement) {
 		this.placement = placement;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getPlacement() {

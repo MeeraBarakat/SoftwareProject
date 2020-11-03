@@ -6,7 +6,6 @@ public class ByTypeSpec implements GeneralSpec {
 
 	public ByTypeSpec(String type) {
 		this.type = type;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getType() {
