@@ -13,10 +13,6 @@ public class ByAmentiesSpec implements GeneralSpec {
 		return amentie;
 	}
 
-	public void setAmentie(String amentie) {
-		this.amentie = amentie;
-	}
-
 	public boolean isSpecMatched(Home home) {
 		return home.getAmenties().contains(getAmentie());
 	}

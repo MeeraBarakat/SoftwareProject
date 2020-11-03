@@ -13,7 +13,11 @@ plugin= {"html:target/cucumber/wikipedia.html"},
 		glue= {"TestPackage"},
 		strict=true
 )
-
 public class AcceptanceTest {
 
+	public AcceptanceTest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 }

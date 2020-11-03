@@ -13,10 +13,6 @@ public class ByPlacementSpec implements GeneralSpec {
 		return placement;
 	}
 
-	public void setPlacement(String placement) {
-		this.placement = placement;
-	}
-
 	public boolean isSpecMatched(Home home) {
 		return home.getPlacement().equalsIgnoreCase(getPlacement());
 	}

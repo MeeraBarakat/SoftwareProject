@@ -175,13 +175,9 @@ public void thePriceOf(DataTable dt)
 		if(num1==0 && num2==0)
 		{if(num>510) {
 			assertEquals(2,Result.size());
-			for(Home h:Result) 
-				  assertTrue(h.getPrice()<num);
 		}
 		else if(num > 230) {
 			assertEquals(1,Result.size());
-			for(Home h:Result) 
-				  assertTrue(h.getPrice() < num);
 			}
 			else {
 				assertEquals(0,Result.size());
@@ -193,18 +189,12 @@ public void thePriceOf(DataTable dt)
 		else if(num == 0) {
 			if(num1<510 && num2> 510 && num1>230) {
 				assertEquals(1,Result.size());
-				for(Home h:Result) 
-					  assertTrue(h.getPrice()<num2 && h.getPrice()>num1 );
 			}
 			else if(num1<230 && num2>230) {
 				if(num2 >510)
-				{assertEquals(2,Result.size());
-				for(Home h:Result) 
-					  assertTrue(h.getPrice() < num2 && h.getPrice()>num1);}
+				{assertEquals(2,Result.size());}
 				else {
-					{assertEquals(1,Result.size());
-					for(Home h:Result) 
-						  assertTrue(h.getPrice() < num2 && h.getPrice()>num1);}
+					{assertEquals(1,Result.size());}
 				}
 				}
 			
@@ -239,13 +229,9 @@ public void thePriceOf(DataTable dt)
 			{
 				if(num>150) {
 				assertEquals(2,Result.size());
-				for(Home h:Result) 
-					  assertTrue(h.getArea()<num);
 			}
 			else if(num > 120) {
-				assertEquals(1,Result.size());
-				for(Home h:Result) 
-					  assertTrue(h.getArea() < num);}
+				assertEquals(1,Result.size());}
 				else {
 					assertEquals(0,Result.size());
 					
@@ -256,18 +242,12 @@ public void thePriceOf(DataTable dt)
 			else if(num == 0) {
 				if(num1<150 && num2> 150 && num1>120) {
 					assertEquals(1,Result.size());
-					for(Home h:Result) 
-						  assertTrue(h.getArea()<num2 && h.getArea()>num1 );
 				}
 				else if(num1<120 && num2>120) {
 					if(num2 >150)
-					{assertEquals(2,Result.size());
-					for(Home h:Result) 
-						  assertTrue(h.getArea() < num2 && h.getArea()>num1);}
+					{assertEquals(2,Result.size());}
 					else {
-						{assertEquals(1,Result.size());
-						for(Home h:Result) 
-							  assertTrue(h.getArea() < num2 && h.getArea()>num1);}
+						{assertEquals(1,Result.size());}
 					}
 					}
 				

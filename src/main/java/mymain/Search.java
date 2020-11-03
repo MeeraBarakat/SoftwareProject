@@ -68,101 +68,61 @@ public class Search {
 		}
 	}
 	
-	public List <Home> byPriceLess(int price)
+	public List <Home> byPriceBetween(int area1,int area2)
 	{
-		Found_home=new ArrayList<Home>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getPrice() < price)
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new ByPriceBetweenSpec( area1, area2);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}
 	
-	public List <Home> byPriceBetween(int price1,int price2)
+	public List <Home> byPriceLess(int price)
 	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getPrice() < price2 && home.getPrice() > price1)
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new ByPriceLessSpec(price);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}
+	
 	
 	public List <Home> byAreaLess(int area)
 	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getArea() < area)
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new ByAreaLessSpec(area);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}
 	
 	
-	public List <Home> byBathrooms(int bathrooms)
-	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
+		public List <Home> byBathrooms(int area)
 		{
-			Home home=Homes.next();
-			if(home.getBathrooms()==bathrooms )
-				Found_home.add(home);
+			GeneralSpec spec=new byBathroomsSpec(area);
+			HomeSearch(spec);
+			return Found_home;
+			
 		}
-		return Found_home;
 		
-	}
 	
 	public List <Home> byBedrooms(int bedrooms)
 	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getBedrooms()==bedrooms)
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new byBedroomsSpec(bedrooms);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}
 	
 	public List <Home> byPets(String Pets)
 	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getPets().equalsIgnoreCase(Pets))
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new byPetsSpec(Pets);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}
 	
 	public List <Home> byLeaseLength(int Lease)
 	{
-		Found_home=new ArrayList<>();
-		Iterator <Home> Homes=repository.iterator();
-		while(Homes.hasNext())
-		{
-			Home home=Homes.next();
-			if(home.getLeaselength()==Lease)
-				Found_home.add(home);
-		}
+		GeneralSpec spec=new byLeaseLengthSpec(Lease);
+		HomeSearch(spec);
 		return Found_home;
 		
 	}

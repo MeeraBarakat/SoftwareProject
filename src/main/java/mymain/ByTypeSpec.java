@@ -13,10 +13,6 @@ public class ByTypeSpec implements GeneralSpec {
 		return type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public boolean isSpecMatched(Home home) {
 		return home.getType().equalsIgnoreCase(getType());
 	}

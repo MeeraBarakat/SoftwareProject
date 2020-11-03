@@ -13,10 +13,6 @@ public class ByMaterialSpec implements GeneralSpec {
 		return material;
 	}
 
-	public void setMaterial(String material) {
-		this.material = material;
-	}
-
 	public boolean isSpecMatched(Home home) {
 		return home.getMaterial().equalsIgnoreCase(getMaterial());
 	}
