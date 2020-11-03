@@ -1,17 +1,17 @@
 package mymain;
 
-public class byPetsSpec implements GeneralSpec {
+public class ByPetsSpec implements GeneralSpec {
 
-		private String Pets;
+		private String pets;
 
-		public byPetsSpec(String Pets) {
-			this.Pets = Pets;
+		public ByPetsSpec(String pets) {
+			this.pets = pets;
 		}
 
 
 
 		public String getPets() {
-			return Pets;
+			return pets;
 		}
 
 

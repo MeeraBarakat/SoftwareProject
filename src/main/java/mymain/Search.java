@@ -60,10 +60,10 @@ public class Search {
 	}
 	public void homeSearch(GeneralSpec spec) {
 		foundHome=new ArrayList<>();
-		Iterator <Home> homes=repository.iterator();
-		while(homes.hasNext())
+		Iterator <Home> theHomes=repository.iterator();
+		while(theHomes.hasNext())
 		{
-			Home home=homes.next();
+			Home home=theHomes.next();
 			if(spec.isSpecMatched(home) )
 				foundHome.add(home);
 		}
@@ -97,7 +97,7 @@ public class Search {
 	
 		public List <Home> byBathrooms(int area)
 		{
-			spec=new byBathroomsSpec(area);
+			spec=new ByBathroomsSpec(area);
 			homeSearch(spec);
 			return foundHome;
 			
@@ -106,7 +106,7 @@ public class Search {
 	
 	public List <Home> byBedrooms(int bedrooms)
 	{
-		spec=new byBedroomsSpec(bedrooms);
+		spec=new ByBedroomsSpec(bedrooms);
 		homeSearch(spec);
 		return foundHome;
 		
@@ -114,7 +114,7 @@ public class Search {
 	
 	public List <Home> byPets(String pets)
 	{
-		spec=new byPetsSpec(pets);
+		spec=new ByPetsSpec(pets);
 		homeSearch(spec);
 		return foundHome;
 		
@@ -122,7 +122,7 @@ public class Search {
 	
 	public List <Home> byLeaseLength(int lease)
 	{
-		spec=new byLeaseLengthSpec(lease);
+		spec=new ByLeaseLengthSpec(lease);
 		homeSearch(spec);
 		return foundHome;
 		

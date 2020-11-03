@@ -1,9 +1,9 @@
 package mymain;
 
-public class byBedroomsSpec implements GeneralSpec {
+public class ByBedroomsSpec implements GeneralSpec {
 	private int bedrooms;
 
-	public byBedroomsSpec(int bedrooms) {
+	public ByBedroomsSpec(int bedrooms) {
 		this.bedrooms = bedrooms;
 	}
 

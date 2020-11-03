@@ -1,10 +1,10 @@
 package mymain;
 
-public class byLeaseLengthSpec implements GeneralSpec {
+public class ByLeaseLengthSpec implements GeneralSpec {
 
 		private int Lease;
 
-		public byLeaseLengthSpec(int Lease) {
+		public ByLeaseLengthSpec(int Lease) {
 			this.Lease = Lease;
 		}
 
