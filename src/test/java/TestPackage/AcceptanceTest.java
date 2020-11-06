@@ -17,7 +17,6 @@ public class AcceptanceTest {
 
 	public AcceptanceTest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 }

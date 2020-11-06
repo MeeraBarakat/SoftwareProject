@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Console;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public void thePriceOf(DataTable dt)
 	}
 
 	@Then("A list of homes that matches the placement specification should be returned and printed on the console")
-	public void totalHomesPlacement()
+	public void totalHomesPlacement() throws IOException
 	{
 		if(string.equalsIgnoreCase("City")) {
 			assertEquals(1,Result.size());
@@ -106,7 +107,7 @@ public void thePriceOf(DataTable dt)
 	}
 	
 	@Then("A list of homes that matches the material specification should be returned and printed on the console")
-	public void totalHomesMaterial()
+	public void totalHomesMaterial() throws IOException
 	{
 		System.out.println();
 		System.out.println("Material filter =>"+"\n");
@@ -131,7 +132,7 @@ public void thePriceOf(DataTable dt)
 	}
 	
 	@Then("A list of homes that matches the type specification should be returned and printed on the console")
-	public void totalHomesType()
+	public void totalHomesType() throws IOException
 	{
 		System.out.println();
 		System.out.println("Type filter =>"+"\n");
@@ -168,7 +169,7 @@ public void thePriceOf(DataTable dt)
 	}
 	
 	@Then("A list of homes that matches the price specification should be returned and printed on the console")
-	public void totalHomesPrice()
+	public void totalHomesPrice() throws IOException
 	{
 		System.out.println();
 		System.out.println("Price filter => "+"\n");
@@ -221,7 +222,7 @@ public void thePriceOf(DataTable dt)
 	}
 	
 	@Then("A list of homes that matches the area specification should be returned and printed on the console")
-	public void totalHomesArea()
+	public void totalHomesArea() throws IOException
 	{
 			System.out.println();
 			System.out.println("Area filter =>"+"\n");
@@ -270,7 +271,7 @@ public void thePriceOf(DataTable dt)
 
 
 	@Then("A list of homes that matches the bedrooms specification should be returned and printed on the console")
-	public void aListOfHomesThatMatchesTheBedroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+	public void aListOfHomesThatMatchesTheBedroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
 		System.out.println();
 		System.out.println("Bedrooms filter =>"+"\n");
 		if(num==1) {
@@ -315,7 +316,7 @@ public void thePriceOf(DataTable dt)
 		
 
 		@Then("A list of homes that matches the bathrooms specification should be returned and printed on the console")
-		public void aListOfHomesThatMatchesTheBathroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+		public void aListOfHomesThatMatchesTheBathroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
 			System.out.println();
 			System.out.println("Bathrooms filter =>"+"\n");
 			if(num==1) {
@@ -348,7 +349,7 @@ public void thePriceOf(DataTable dt)
 
 
 			@Then("A list of homes that matches the pets specification should be returned and printed on the console")
-			public void aListOfHomesThatMatchesThePetsSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+			public void aListOfHomesThatMatchesThePetsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
 				System.out.println();
 				System.out.println("Pets filter =>" + "\n");
 				if(string.equalsIgnoreCase("no")) {
@@ -376,7 +377,7 @@ public void thePriceOf(DataTable dt)
 
 
            @Then("A list of homes that matches the leaselength specification should be returned and printed on the console")
-				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
 	            System.out.println();
 	            System.out.println("LeaseLength filter =>" +"\n");	
 	            if(num==6) {
@@ -398,7 +399,7 @@ public void thePriceOf(DataTable dt)
 
 					
            @Then("A list of homes that matches the amenties specification should be returned and printed on the console")
-	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole() {
+	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
 	               System.out.println();
 	               System.out.println("Amenties filter =>"+"\n");
 	               if(string.equalsIgnoreCase("AirConditioning")) {

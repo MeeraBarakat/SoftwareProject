@@ -1,8 +1,12 @@
 package mymain;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import io.cucumber.core.logging.Logger;
 
 
 
@@ -13,21 +17,22 @@ public class Search {
 	ArrayList <Home> result=new ArrayList<>();
 	GeneralSpec spec;
 	public static final boolean PFLAG=false;
-	
-	
+	 OutputStreamWriter streamWriter = new OutputStreamWriter(System.out);
    public Search(List <Home> house){
 		homes=house;
 		repository=house;
 	}
    
    
-	public void printRes(List <Home> myResult) {
+	public void printRes(List <Home> myResult) throws IOException {
 		String res;
 		for(Home h:myResult)
 		{
 			res="Home" + "[" +"type:"+h.getType()+","+"Material:"+h.getMaterial()+","+"Placement:"+h.getPlacement()+"\n"+","+"Allow Pets:"+h.getPets()+","+"Amenties:"+h.getAmenties()+","+"\n"+"Price:"+h.getPrice()+","+"Area:"+h.getArea()+","+"Bedrooms:"+h.getBedrooms()+","+"\n"+"Bathrooms:"+h.getBathrooms()+","+"leaselenght:"+h.getLeaselength()+"]";
-			System.out.println(res);
-			System.out.println();
+			streamWriter.write(res);
+		     streamWriter.flush();
+		     streamWriter.write("\n");
+		     streamWriter.flush();
 		}
 		
 	}
