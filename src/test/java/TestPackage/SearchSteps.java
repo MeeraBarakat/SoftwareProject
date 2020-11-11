@@ -2,7 +2,7 @@ package TestPackage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.mockito.Mockito.*;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,25 +10,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.internal.verification.Times;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.picocontainer.annotations.Inject;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.internal.com.google.common.base.Enums;
+import io.cucumber.messages.internal.com.google.common.base.Verify;
+import mymain.ByAmentiesSpec;
+import mymain.ByPlacementSpec;
+import mymain.ByTypeSpec;
+import mymain.GeneralSpec;
 import mymain.Home;
+import mymain.Multi;
 import mymain.Search;
 import io.cucumber.datatable.DataTable;
+
 
 public class SearchSteps {
 	ArrayList <Home> Homes=new ArrayList<Home>();
 	List <Home> Result=new ArrayList<Home>();
+	String str="";
 	Search S;
 	  String string=" ";
 	  int num=0;
 	  int num1=0;
-	  int num2=0; 
+	  int num2=0;
+	  private Multi multi;
+		private GeneralSpec ament ;
+			private GeneralSpec place;
+			private GeneralSpec type;
+	 
+	 
 	
 	@Given ("these homes are contained in the system")
 public void thePriceOf(DataTable dt)
@@ -51,34 +70,46 @@ public void thePriceOf(DataTable dt)
 			Homes.add(home);
 	}
 		S=new Search(Homes);
+		multi=new Multi(Homes);
 	}
 
 	@When("I search about home by {string} amenties")
 	public void iSearchAboutHomeByamenties(String st)
 	{
+		str+=st+"and";
 		  string=st;
+		  Result.clear();
 		  Result=S.byamenties(st);
 		
 }
+	
+	  
 	@When("I search about home by {string}")
 	public void iSearchAboutHomeBy(String st)
 	{
+		str+=st+"and";
 		  string=st;
+		  Result.clear();
 		  Result=S.byplacement(st);
-		
 	}
+	
+
 
 	@When("I search about home by {string} material")
 	public void iSearchAboutHomeBymaterial(String st)
 	{
+		str+=st+"and";
 		  string=st;
+		  Result.clear();
 		  Result=S.bymaterial(st);
 		
 	}
 	@When("I search about home by {string} type")
 	public void iSearchAboutHomeBytype(String st)
 	{
+		str+=st+"and";
 		  string=st;
+		  Result.clear();
 		  Result=S.bytype(st);
 	}
 
@@ -155,15 +186,19 @@ public void thePriceOf(DataTable dt)
 	@When("I search about home with price less than {int}")
 	public void IsearchLessPrice(int Price)
 	{ 
+		str+=Price+"/"+"priceless"+"and";
 		    num=Price;
+		    Result.clear();
 		    Result=S.byPriceLess(Price);
 	}
 	
 	@When("I search about home with price more than {int} and less than {int}")
 	public void IsearchRangePrice(int LowerP,int UpperP)
 	{
+		str+=LowerP+"/"+UpperP+"/"+"pricebetween"+"and";
 		num1=LowerP;
 		num2=UpperP;
+		Result.clear();
 		Result= S.byPriceBetween(LowerP, UpperP);
 	
 	}
@@ -209,15 +244,19 @@ public void thePriceOf(DataTable dt)
 	
 	@When("I search about home with area less than {int}")
 	public void IsearchLessArea(int Area)
-	{      num=Area;
+	{   str+=Area+"/"+"arealess"+"and";
+		   num=Area;
+		   Result.clear();
 		   Result= S.byAreaLess(Area);
 	}
 	
 	@When("I search about home with area more than {int} and less than {int}")
 	public void IsearchRangeArea(int LowerA,int UpperA)
 	{
+		str+=LowerA+"/"+UpperA+"/"+"areabetween"+"and";
 		num1=LowerA;
 		num2=UpperA;
+		Result.clear();
 		Result= S.byAreaBetween(LowerA, UpperA);
 	}
 	
@@ -264,7 +303,9 @@ public void thePriceOf(DataTable dt)
 
 	@When("I search about home with {int} Number of bedrooms")
 	public void iSearchAboutHomeWithNumberOfBedrooms(Integer bedrooms) {
-		     num=bedrooms;
+		str+=bedrooms+"/"+"bedrooms"+"and";     
+		num=bedrooms;
+		Result.clear();
 		     Result= S.byBedrooms(bedrooms);
 	}
 
@@ -308,7 +349,9 @@ public void thePriceOf(DataTable dt)
 
 		@When("I search about home with {int} Number of bathrooms")
 		public void iSearchAboutHomeWithNumberOfBathrooms(Integer bathrooms) {
+			str+=bathrooms+"/"+"bathrooms"+"and"; 
 			num=bathrooms;
+			Result.clear();
     		   Result= S.byBathrooms(bathrooms);
 		}
 
@@ -342,7 +385,9 @@ public void thePriceOf(DataTable dt)
 
 			@When("I search about home By {string} Allow Pets")
 			public void iSearchAboutHomeByAllowPets(String pets) {
+				str+=pets+"and"; 
 				string=pets;
+				Result.clear();
     		  Result=S.byPets(pets);
 			}
 
@@ -370,11 +415,11 @@ public void thePriceOf(DataTable dt)
 
 				@When("I search about home By {int} Lease Length")
 				public void iSearchAboutHomeByLeaseLength(Integer lease) {
-				        num=lease;
+					str+=lease+"/"+"leaselength"+"and";    
+					num=lease;
+					Result.clear();
 	    		     Result= S.byLeaseLength(lease);
 				}
-
-
 
            @Then("A list of homes that matches the leaselength specification should be returned and printed on the console")
 				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
@@ -396,7 +441,7 @@ public void thePriceOf(DataTable dt)
 	           
 					
 				}
-
+       
 					
            @Then("A list of homes that matches the amenties specification should be returned and printed on the console")
 	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
@@ -434,9 +479,24 @@ public void thePriceOf(DataTable dt)
 					}
 				
 	               S.printRes(Result);
-	              
-				}
-         
+	               
+           }
            
-	
+           @When("I search about home by {string} and by {string} By {string}")
+           public void iSearchAboutHomeByAndByBy(String string, String string2, String string3) {
+           	ament=new ByAmentiesSpec(string);	
+           	place=new ByPlacementSpec(string2);
+           	type=new ByTypeSpec (string3);
+           	Result=multi.cmp(ament,place,type);
+           }
+
+
+
+
+           @Then("A list of homes that matches the multiple specification should be returned and printed on the console")
+           public void aListOfHomesThatMatchesTheMultipleSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+           	System.out.println();
+           	System.out.println("multi filter =>"+"\n");
+           	S.printRes(Result);
+           }
 }	

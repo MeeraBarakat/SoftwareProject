@@ -6,19 +6,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import io.cucumber.core.logging.Logger;
-
-
-
 public class Search {
 	List <Home> repository=new ArrayList<>();
-	private ArrayList <Home> foundHome;
 	List <Home> homes;
 	ArrayList <Home> result=new ArrayList<>();
 	GeneralSpec spec;
+
 	public static final boolean PFLAG=false;
 	 OutputStreamWriter streamWriter = new OutputStreamWriter(System.out);
-   public Search(List <Home> house){
+	 public Search(List <Home> house){
 		homes=house;
 		repository=house;
 	}
@@ -39,32 +35,34 @@ public class Search {
 	public List<Home> byplacement(String placement) {
 		spec=new ByPlacementSpec(placement);
 		homeSearch(spec);
-		return foundHome ;
+		return homeSearch(spec);
+		
 	}
 	public List<Home> bymaterial(String material) {
 		spec=new ByMaterialSpec(material);
 		homeSearch(spec);
-		return foundHome ;
+		return homeSearch(spec);
 	}
 	public List<Home> bytype(String type) {
 		spec=new ByTypeSpec(type);
 		homeSearch(spec);
-		return foundHome ;
+		return homeSearch(spec);
 	}
 	public List<Home> byamenties(String amentie) {
 		spec=new ByAmentiesSpec(amentie);
 		homeSearch(spec);
-		return foundHome ;
+		return homeSearch(spec);
 	}
 	public List <Home> byAreaBetween(int area1,int area2)
 	{
 		spec=new ByAreaBetweenSpec( area1, area2);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
-	public void homeSearch(GeneralSpec spec) {
-		foundHome=new ArrayList<>();
+	
+	public List<Home> homeSearch(GeneralSpec spec) {
+		ArrayList <Home> foundHome=new ArrayList<>();
 		Iterator <Home> theHomes=repository.iterator();
 		while(theHomes.hasNext())
 		{
@@ -72,13 +70,14 @@ public class Search {
 			if(spec.isSpecMatched(home) )
 				foundHome.add(home);
 		}
+		return foundHome;
 	}
 	
 	public List <Home> byPriceBetween(int area1,int area2)
 	{
 		spec=new ByPriceBetweenSpec( area1, area2);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
 	
@@ -86,7 +85,7 @@ public class Search {
 	{
 		spec=new ByPriceLessSpec(price);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
 	
@@ -95,16 +94,16 @@ public class Search {
 	{
 		spec=new ByAreaLessSpec(area);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
 	
 	
-		public List <Home> byBathrooms(int area)
+		public List <Home> byBathrooms(int bathrooms)
 		{
-			spec=new ByBathroomsSpec(area);
+			spec=new ByBathroomsSpec(bathrooms);
 			homeSearch(spec);
-			return foundHome;
+			return homeSearch(spec);
 			
 		}
 		
@@ -113,7 +112,7 @@ public class Search {
 	{
 		spec=new ByBedroomsSpec(bedrooms);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
 	
@@ -121,7 +120,7 @@ public class Search {
 	{
 		spec=new ByPetsSpec(pets);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
 	
@@ -129,8 +128,11 @@ public class Search {
 	{
 		spec=new ByLeaseLengthSpec(lease);
 		homeSearch(spec);
-		return foundHome;
+		return homeSearch(spec);
 		
 	}
+
+
+
 	
 }

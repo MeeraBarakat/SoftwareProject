@@ -8,6 +8,7 @@ Given  these homes are contained in the system
 Scenario Outline: Search home by placement
 When I search about home by <placement>
 Then A list of homes that matches the placement specification should be returned and printed on the console
+
 Examples:
 |placement|
 |"City"|
@@ -117,3 +118,7 @@ Then A list of homes that matches the amenties specification should be returned 
   |"AirConditioning"|
   |"Balcony"|
   |"SwimmingPool"|
+
+Scenario: Search about home using MultiSpec
+When I search about home by "ELEVATOR" and by "city" By "APARTMENT" 
+Then A list of homes that matches the multiple specification should be returned and printed on the console

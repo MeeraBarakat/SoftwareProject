@@ -16,7 +16,7 @@ public class ByPetsSpec implements GeneralSpec {
 
 
 		public boolean isSpecMatched(Home home) {
-			return home.getPets() .equals(getPets()) ;
+			return home.getPets().equalsIgnoreCase(getPets()) ;
 		}
 
 
