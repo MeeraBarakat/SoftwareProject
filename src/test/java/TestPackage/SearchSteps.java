@@ -3,31 +3,24 @@ package TestPackage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
-import java.io.Console;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.internal.verification.Times;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.picocontainer.annotations.Inject;
-
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.messages.internal.com.google.common.base.Enums;
-import io.cucumber.messages.internal.com.google.common.base.Verify;
 import mymain.ByAmentiesSpec;
 import mymain.ByPlacementSpec;
 import mymain.ByTypeSpec;
 import mymain.GeneralSpec;
 import mymain.Home;
+import mymain.MockEmailHolder;
 import mymain.Multi;
 import mymain.Search;
 import io.cucumber.datatable.DataTable;
@@ -36,20 +29,55 @@ import io.cucumber.datatable.DataTable;
 public class SearchSteps {
 	ArrayList <Home> Homes=new ArrayList<Home>();
 	List <Home> Result=new ArrayList<Home>();
-	String str="";
-	Search S;
+	  String str="";
+	  Search S;
 	  String string=" ";
 	  int num=0;
 	  int num1=0;
 	  int num2=0;
 	  private Multi multi;
-		private GeneralSpec ament ;
-			private GeneralSpec place;
-			private GeneralSpec type;
-	 
-	 
-	
-	@Given ("these homes are contained in the system")
+	  private GeneralSpec ament ;
+	  private GeneralSpec place;
+	  private GeneralSpec type;
+	  private MockEmailHolder mockemailholder;
+			
+			 public SearchSteps(Search s,MockEmailHolder mockmail) {
+				 S=s;
+				 mockemailholder=mockmail;				
+			 }
+			 
+			 public void printRes(List <Home> myResult) {
+					String res;
+					for(Home h:myResult)
+					{
+						res="Home" + "[" +"type:"+h.getType()+","+"Material:"+h.getMaterial()+","+"Placement:"+h.getPlacement()+"\n"+","+"Allow Pets:"+h.getPets()+","+"Amenties:"+h.getAmenties()+","+"\n"+"Price:"+h.getPrice()+","+"Area:"+h.getArea()+","+"Bedrooms:"+h.getBedrooms()+","+"\n"+"Bathrooms:"+h.getBathrooms()+","+"leaselenght:"+h.getLeaselength()+"]";
+						Logger log = Logger.getLogger("mylogger.txt");
+						ConsoleHandler handler = new ConsoleHandler();
+						log.setLevel(Level.CONFIG);
+						handler.setLevel(Level.CONFIG);
+						handler.setFormatter(fr);
+						log.addHandler(handler);
+						log.config(res);
+						handler.setLevel(Level.OFF);
+					}
+					
+				}
+
+			 Formatter fr=new Formatter() {
+			        private static final String FORMAT = "%s %n";
+
+			        @Override
+			        public synchronized String format(LogRecord lr) {
+			            return String.format(FORMAT,
+			                    lr.getMessage()
+			            );
+			        }
+			    };
+
+
+			private String multiamentie;
+			private String multiplace;
+			private String multitype;	@Given ("these homes are contained in the system")
 public void thePriceOf(DataTable dt)
 	{
 	List<List<String>> list = dt.asLists();
@@ -69,52 +97,43 @@ public void thePriceOf(DataTable dt)
 			home.setLeaselength(Integer.parseInt(value[4]));
 			Homes.add(home);
 	}
-		S=new Search(Homes);
+		S.setrepository(Homes);
 		multi=new Multi(Homes);
 	}
 
 	@When("I search about home by {string} amenties")
-	public void iSearchAboutHomeByamenties(String st)
+	public void iSearchAboutHomeByamenties(String st) throws IOException, MessagingException
 	{
-		str+=st+"and";
 		  string=st;
-		  Result.clear();
 		  Result=S.byamenties(st);
-		
-}
+    }
 	
 	  
 	@When("I search about home by {string}")
-	public void iSearchAboutHomeBy(String st)
+	public void iSearchAboutHomeBy(String st) throws IOException, MessagingException
 	{
-		str+=st+"and";
 		  string=st;
-		  Result.clear();
 		  Result=S.byplacement(st);
 	}
 	
 
 
 	@When("I search about home by {string} material")
-	public void iSearchAboutHomeBymaterial(String st)
+	public void iSearchAboutHomeBymaterial(String st) throws IOException, MessagingException
 	{
-		str+=st+"and";
 		  string=st;
-		  Result.clear();
 		  Result=S.bymaterial(st);
 		
 	}
 	@When("I search about home by {string} type")
-	public void iSearchAboutHomeBytype(String st)
+	public void iSearchAboutHomeBytype(String st) throws IOException, MessagingException
 	{
-		str+=st+"and";
 		  string=st;
-		  Result.clear();
 		  Result=S.bytype(st);
 	}
 
 	@Then("A list of homes that matches the placement specification should be returned and printed on the console")
-	public void totalHomesPlacement() throws IOException
+	public void totalHomesPlacement() 
 	{
 		if(string.equalsIgnoreCase("City")) {
 			assertEquals(1,Result.size());
@@ -128,17 +147,22 @@ public void thePriceOf(DataTable dt)
 				  assertTrue(h.getPlacement().equalsIgnoreCase(string));
 			  }
 	}
-		System.out.println("All Homes = >");
-		System.out.println();
-		S.printRes(Homes);
-		System.out.println();
 		System.out.println("Placement filter =>"+"\n");
-		S.printRes(Result);
+		printRes(Result);
 		
 	}
 	
+	
+    @Then("The result should be sent to Email {string}")
+    public void email(String email) throws IOException, MessagingException {
+        S.sendE(email,Result);
+    	verify(mockemailholder.getMockmail(),times(1)).sendEmail(email, Result);
+    }
+    
+ 
+    
 	@Then("A list of homes that matches the material specification should be returned and printed on the console")
-	public void totalHomesMaterial() throws IOException
+	public void totalHomesMaterial() 
 	{
 		System.out.println();
 		System.out.println("Material filter =>"+"\n");
@@ -158,12 +182,11 @@ public void thePriceOf(DataTable dt)
 			assertEquals(0,Result.size());
 			
 		}
-		S.printRes(Result);
-		
+		printRes(Result);
 	}
 	
 	@Then("A list of homes that matches the type specification should be returned and printed on the console")
-	public void totalHomesType() throws IOException
+	public void totalHomesType() 
 	{
 		System.out.println();
 		System.out.println("Type filter =>"+"\n");
@@ -179,32 +202,28 @@ public void thePriceOf(DataTable dt)
 				  assertTrue(h.getType().equalsIgnoreCase(string));
 			  }
 		}
-		S.printRes(Result);
+		printRes(Result);
 		
 	}
 	
 	@When("I search about home with price less than {int}")
-	public void IsearchLessPrice(int Price)
+	public void IsearchLessPrice(int Price) throws IOException, MessagingException
 	{ 
-		str+=Price+"/"+"priceless"+"and";
 		    num=Price;
-		    Result.clear();
 		    Result=S.byPriceLess(Price);
 	}
 	
 	@When("I search about home with price more than {int} and less than {int}")
-	public void IsearchRangePrice(int LowerP,int UpperP)
+	public void IsearchRangePrice(int LowerP,int UpperP) throws IOException, MessagingException
 	{
-		str+=LowerP+"/"+UpperP+"/"+"pricebetween"+"and";
 		num1=LowerP;
 		num2=UpperP;
-		Result.clear();
 		Result= S.byPriceBetween(LowerP, UpperP);
 	
 	}
 	
 	@Then("A list of homes that matches the price specification should be returned and printed on the console")
-	public void totalHomesPrice() throws IOException
+	public void totalHomesPrice() 
 	{
 		System.out.println();
 		System.out.println("Price filter => "+"\n");
@@ -238,30 +257,28 @@ public void thePriceOf(DataTable dt)
 			assertEquals(0,Result.size());
 		}
 		}	 
-		S.printRes(Result);
+		printRes(Result);
 		
 	}
 	
 	@When("I search about home with area less than {int}")
-	public void IsearchLessArea(int Area)
-	{   str+=Area+"/"+"arealess"+"and";
+	public void IsearchLessArea(int Area) throws IOException, MessagingException
+	{   
 		   num=Area;
-		   Result.clear();
 		   Result= S.byAreaLess(Area);
 	}
 	
 	@When("I search about home with area more than {int} and less than {int}")
 	public void IsearchRangeArea(int LowerA,int UpperA)
 	{
-		str+=LowerA+"/"+UpperA+"/"+"areabetween"+"and";
+		
 		num1=LowerA;
 		num2=UpperA;
-		Result.clear();
 		Result= S.byAreaBetween(LowerA, UpperA);
 	}
 	
 	@Then("A list of homes that matches the area specification should be returned and printed on the console")
-	public void totalHomesArea() throws IOException
+	public void totalHomesArea() 
 	{
 			System.out.println();
 			System.out.println("Area filter =>"+"\n");
@@ -296,23 +313,21 @@ public void thePriceOf(DataTable dt)
 			}
 			}
 					 
-			S.printRes(Result);
+			printRes(Result);
 			
 	}
 	
 
 	@When("I search about home with {int} Number of bedrooms")
-	public void iSearchAboutHomeWithNumberOfBedrooms(Integer bedrooms) {
-		str+=bedrooms+"/"+"bedrooms"+"and";     
+	public void iSearchAboutHomeWithNumberOfBedrooms(Integer bedrooms) throws IOException, MessagingException {     
 		num=bedrooms;
-		Result.clear();
 		     Result= S.byBedrooms(bedrooms);
 	}
 
 
 
 	@Then("A list of homes that matches the bedrooms specification should be returned and printed on the console")
-	public void aListOfHomesThatMatchesTheBedroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+	public void aListOfHomesThatMatchesTheBedroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
 		System.out.println();
 		System.out.println("Bedrooms filter =>"+"\n");
 		if(num==1) {
@@ -339,7 +354,7 @@ public void thePriceOf(DataTable dt)
 			assertEquals(0,Result.size());
 			
 		}
-		S.printRes(Result);
+		printRes(Result);
 		
 		
 	}
@@ -348,10 +363,9 @@ public void thePriceOf(DataTable dt)
 	
 
 		@When("I search about home with {int} Number of bathrooms")
-		public void iSearchAboutHomeWithNumberOfBathrooms(Integer bathrooms) {
-			str+=bathrooms+"/"+"bathrooms"+"and"; 
+		public void iSearchAboutHomeWithNumberOfBathrooms(Integer bathrooms) throws IOException, MessagingException {
+			
 			num=bathrooms;
-			Result.clear();
     		   Result= S.byBathrooms(bathrooms);
 		}
 
@@ -359,7 +373,7 @@ public void thePriceOf(DataTable dt)
 		
 
 		@Then("A list of homes that matches the bathrooms specification should be returned and printed on the console")
-		public void aListOfHomesThatMatchesTheBathroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+		public void aListOfHomesThatMatchesTheBathroomsSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
 			System.out.println();
 			System.out.println("Bathrooms filter =>"+"\n");
 			if(num==1) {
@@ -376,7 +390,7 @@ public void thePriceOf(DataTable dt)
 				
 			}
 		
-			S.printRes(Result);
+			printRes(Result);
 		
 		
 		}
@@ -384,17 +398,15 @@ public void thePriceOf(DataTable dt)
 		
 
 			@When("I search about home By {string} Allow Pets")
-			public void iSearchAboutHomeByAllowPets(String pets) {
-				str+=pets+"and"; 
+			public void iSearchAboutHomeByAllowPets(String pets) throws IOException, MessagingException {
 				string=pets;
-				Result.clear();
     		  Result=S.byPets(pets);
 			}
 
 
 
 			@Then("A list of homes that matches the pets specification should be returned and printed on the console")
-			public void aListOfHomesThatMatchesThePetsSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+			public void aListOfHomesThatMatchesThePetsSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
 				System.out.println();
 				System.out.println("Pets filter =>" + "\n");
 				if(string.equalsIgnoreCase("no")) {
@@ -407,22 +419,20 @@ public void thePriceOf(DataTable dt)
 					assertEquals(0,Result.size());
 					
 				}
-				S.printRes(Result);
+				printRes(Result);
 			
 			
 			}
 
 
 				@When("I search about home By {int} Lease Length")
-				public void iSearchAboutHomeByLeaseLength(Integer lease) {
-					str+=lease+"/"+"leaselength"+"and";    
+				public void iSearchAboutHomeByLeaseLength(Integer lease) throws IOException, MessagingException {    
 					num=lease;
-					Result.clear();
 	    		     Result= S.byLeaseLength(lease);
 				}
 
            @Then("A list of homes that matches the leaselength specification should be returned and printed on the console")
-				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+				public void aListOfHomesThatMatchesTheLeaselengthSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
 	            System.out.println();
 	            System.out.println("LeaseLength filter =>" +"\n");	
 	            if(num==6) {
@@ -437,14 +447,14 @@ public void thePriceOf(DataTable dt)
 						  assertEquals(12,h.getLeaselength());
 					  }
 				}
-	            S.printRes(Result);
+	            printRes(Result);
 	           
 					
 				}
        
 					
            @Then("A list of homes that matches the amenties specification should be returned and printed on the console")
-	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+	               public void aListOfHomesThatMatchesTheAmentiesSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
 	               System.out.println();
 	               System.out.println("Amenties filter =>"+"\n");
 	               if(string.equalsIgnoreCase("AirConditioning")) {
@@ -478,25 +488,33 @@ public void thePriceOf(DataTable dt)
 						
 					}
 				
-	               S.printRes(Result);
+	              printRes(Result);
 	               
            }
            
            @When("I search about home by {string} and by {string} By {string}")
            public void iSearchAboutHomeByAndByBy(String string, String string2, String string3) {
-           	ament=new ByAmentiesSpec(string);	
-           	place=new ByPlacementSpec(string2);
-           	type=new ByTypeSpec (string3);
-           	Result=multi.cmp(ament,place,type);
+        	 multiamentie=string;
+        	 multiplace=string2;
+        	 multitype=string3;
+           	 ament=new ByAmentiesSpec(string);	
+           	 place=new ByPlacementSpec(string2);
+           	 type=new ByTypeSpec (string3);
+           	 Result=multi.cmp(ament,place,type);
            }
-
-
 
 
            @Then("A list of homes that matches the multiple specification should be returned and printed on the console")
-           public void aListOfHomesThatMatchesTheMultipleSpecificationShouldBeReturnedAndPrintedOnTheConsole() throws IOException {
+           public void aListOfHomesThatMatchesTheMultipleSpecificationShouldBeReturnedAndPrintedOnTheConsole()  {
            	System.out.println();
-           	System.out.println("multi filter =>"+"\n");
-           	S.printRes(Result);
-           }
+           	System.out.println("Multi filter =>"+"\n");
+           	assertEquals(1,Result.size());
+           
+           for(Home r:Result) {
+           	assertTrue(r.getAmenties().equalsIgnoreCase(multiamentie));
+        	assertTrue(r.getPlacement().equalsIgnoreCase(multiplace));
+        	assertTrue(r.getType().equalsIgnoreCase(multitype));
+        	printRes(Result);
 }	
+           }
+}

@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="mymain.ByAmentiesSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByAmentiesSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="347" y="-137"/>    
+    <position height="-1" width="-1" x="313" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <interface id="2" language="java" name="mymain.GeneralSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/GeneralSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="247" x="1926" y="599"/>    
+    <position height="-1" width="-1" x="2035" y="459"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </interface>  
   <class id="3" language="java" name="mymain.ByPlacementSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByPlacementSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="634" y="-137"/>    
+    <position height="-1" width="-1" x="600" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="mymain.ByPriceLessSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByPriceLessSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="921" y="-137"/>    
+    <position height="-1" width="-1" x="887" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="mymain.ByLeaseLengthSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByLeaseLengthSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="1208" y="-137"/>    
+    <position height="-1" width="-1" x="1174" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,131 +48,240 @@
   </class>  
   <class id="6" language="java" name="mymain.ByBedroomsSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByBedroomsSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="1495" y="-137"/>    
+    <position height="-1" width="-1" x="1461" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="mymain.ByAreaBetweenSpec" project="ApartSearchApp" 
+  <class id="7" language="java" name="mymain.WebEmailService" project="ApartSearchApp" 
+    file="/ApartSearchApp/src/main/java/mymain/WebEmailService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4002" y="713"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="mymain.ByAreaBetweenSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByAreaBetweenSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="247" x="1782" y="-137"/>    
+    <position height="-1" width="-1" x="1748" y="33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="mymain.ByMaterialSpec" project="ApartSearchApp" 
+  <class id="9" language="java" name="mymain.ByMaterialSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByMaterialSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="2069" y="-137"/>    
+    <position height="-1" width="-1" x="2035" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="mymain.ByPriceBetweenSpec" project="ApartSearchApp" 
+  <class id="10" language="java" name="mymain.ByPriceBetweenSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByPriceBetweenSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="247" x="2356" y="-137"/>    
+    <position height="-1" width="-1" x="2322" y="33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="mymain.Home" project="ApartSearchApp" 
+  <class id="11" language="java" name="mymain.Home" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/Home.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="696" width="205" x="3791" y="-137"/>    
+    <position height="-1" width="-1" x="3370" y="905"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="mymain.ByBathroomsSpec" project="ApartSearchApp" 
+  <class id="12" language="java" name="mymain.ByBathroomsSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByBathroomsSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="2643" y="-137"/>    
+    <position height="-1" width="-1" x="2609" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="mymain.ByPetsSpec" project="ApartSearchApp" 
+  <class id="13" language="java" name="mymain.MockEmailHolder" project="ApartSearchApp" 
+    file="/ApartSearchApp/src/main/java/mymain/MockEmailHolder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4142" y="3"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="mymain.ByPetsSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByPetsSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="2930" y="-137"/>    
+    <position height="-1" width="-1" x="2896" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="mymain.ByTypeSpec" project="ApartSearchApp" 
+  <class id="15" language="java" name="mymain.Multi" project="ApartSearchApp" 
+    file="/ApartSearchApp/src/main/java/mymain/Multi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4088" y="-163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="mymain.ByTypeSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByTypeSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="3217" y="-137"/>    
+    <position height="-1" width="-1" x="3183" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="mymain.ByAreaLessSpec" project="ApartSearchApp" 
+  <class id="17" language="java" name="mymain.ByAreaLessSpec" project="ApartSearchApp" 
     file="/ApartSearchApp/src/main/java/mymain/ByAreaLessSpec.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="156" width="247" x="3504" y="-137"/>    
+    <position height="-1" width="-1" x="3470" y="13"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="15">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="16">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="17">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="18">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
+  <class id="18" language="java" name="mymain.Search" project="ApartSearchApp" 
+    file="/ApartSearchApp/src/main/java/mymain/Search.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3787" y="153"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <realization id="19">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <realization id="20">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
+  <realization id="20">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
   <realization id="21">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="22">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="23" name="searchhome"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="25">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="26">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="27" name="homes"/>      
+      <multiplicity id="28" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="29">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="30">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="22">    
-    <end type="SOURCE" refId="7"/>    
+  <realization id="31">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="23">    
-    <end type="SOURCE" refId="12"/>    
+  <association id="32">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="33" name="spec"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="36" name="repository"/>      
+      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="39" name="emailservice"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="41">    
+    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="24">    
+  <realization id="42">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="43">    
+    <bendpoint x="3970" y="-65"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="44" name="finalr"/>      
+      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="46">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="25">    
-    <end type="SOURCE" refId="1"/>    
+  <realization id="47">    
+    <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="26">    
-    <end type="SOURCE" refId="11"/>    
+  <association id="48">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="49" name="finallist"/>      
+      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="52" name="mockmail"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="55" name="result"/>      
+      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="57">    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
