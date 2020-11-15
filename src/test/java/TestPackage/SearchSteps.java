@@ -29,9 +29,12 @@ import io.cucumber.datatable.DataTable;
 public class SearchSteps {
 	ArrayList <Home> Homes=new ArrayList<Home>();
 	List <Home> Result=new ArrayList<Home>();
-	  String str="";
-	  Search S;
+	  Search S=new Search();
 	  String string=" ";
+	  String multiamentie="";
+	  String multiplace="";
+	  String multitype="";
+	  private String subject="";
 	  int num=0;
 	  int num1=0;
 	  int num2=0;
@@ -41,7 +44,7 @@ public class SearchSteps {
 	  private GeneralSpec type;
 	  private MockEmailHolder mockemailholder;
 			
-			 public SearchSteps(Search s,MockEmailHolder mockmail) {
+		 public SearchSteps(Search s,MockEmailHolder mockmail) {
 				 S=s;
 				 mockemailholder=mockmail;				
 			 }
@@ -73,11 +76,9 @@ public class SearchSteps {
 			            );
 			        }
 			    };
+			    
 
-
-			private String multiamentie;
-			private String multiplace;
-			private String multitype;	@Given ("these homes are contained in the system")
+	@Given ("these homes are contained in the system")
 public void thePriceOf(DataTable dt)
 	{
 	List<List<String>> list = dt.asLists();
@@ -105,15 +106,19 @@ public void thePriceOf(DataTable dt)
 	public void iSearchAboutHomeByamenties(String st) throws IOException, MessagingException
 	{
 		  string=st;
+		  subject="Dear client this is the list of your amentie spec";
 		  Result=S.byamenties(st);
-    }
+		
+}
 	
 	  
 	@When("I search about home by {string}")
 	public void iSearchAboutHomeBy(String st) throws IOException, MessagingException
 	{
 		  string=st;
+		  subject="Dear client this is the list of your placement spec";
 		  Result=S.byplacement(st);
+		  
 	}
 	
 
@@ -122,6 +127,7 @@ public void thePriceOf(DataTable dt)
 	public void iSearchAboutHomeBymaterial(String st) throws IOException, MessagingException
 	{
 		  string=st;
+		  subject="Dear client this is the list of your material spec";
 		  Result=S.bymaterial(st);
 		
 	}
@@ -129,6 +135,7 @@ public void thePriceOf(DataTable dt)
 	public void iSearchAboutHomeBytype(String st) throws IOException, MessagingException
 	{
 		  string=st;
+		  subject="Dear client this is the list of your type spec";
 		  Result=S.bytype(st);
 	}
 
@@ -152,12 +159,9 @@ public void thePriceOf(DataTable dt)
 		
 	}
 	
+
 	
-    @Then("The result should be sent to Email {string}")
-    public void email(String email) throws IOException, MessagingException {
-        S.sendE(email,Result);
-    	verify(mockemailholder.getMockmail(),times(1)).sendEmail(email, Result);
-    }
+ 
     
  
     
@@ -210,6 +214,7 @@ public void thePriceOf(DataTable dt)
 	public void IsearchLessPrice(int Price) throws IOException, MessagingException
 	{ 
 		    num=Price;
+		    subject="Dear client this is the list of your price spec";
 		    Result=S.byPriceLess(Price);
 	}
 	
@@ -218,6 +223,7 @@ public void thePriceOf(DataTable dt)
 	{
 		num1=LowerP;
 		num2=UpperP;
+		  subject="Dear client this is the list of your price range spec";
 		Result= S.byPriceBetween(LowerP, UpperP);
 	
 	}
@@ -265,6 +271,7 @@ public void thePriceOf(DataTable dt)
 	public void IsearchLessArea(int Area) throws IOException, MessagingException
 	{   
 		   num=Area;
+		   subject="Dear client this is the list of your area spec";
 		   Result= S.byAreaLess(Area);
 	}
 	
@@ -274,6 +281,7 @@ public void thePriceOf(DataTable dt)
 		
 		num1=LowerA;
 		num2=UpperA;
+		  subject="Dear client this is the list of your area range spec";
 		Result= S.byAreaBetween(LowerA, UpperA);
 	}
 	
@@ -321,6 +329,7 @@ public void thePriceOf(DataTable dt)
 	@When("I search about home with {int} Number of bedrooms")
 	public void iSearchAboutHomeWithNumberOfBedrooms(Integer bedrooms) throws IOException, MessagingException {     
 		num=bedrooms;
+		  subject="Dear client this is the list of your bedrooms spec";
 		     Result= S.byBedrooms(bedrooms);
 	}
 
@@ -366,6 +375,7 @@ public void thePriceOf(DataTable dt)
 		public void iSearchAboutHomeWithNumberOfBathrooms(Integer bathrooms) throws IOException, MessagingException {
 			
 			num=bathrooms;
+			  subject="Dear client this is the list of your bathroom spec";
     		   Result= S.byBathrooms(bathrooms);
 		}
 
@@ -400,6 +410,7 @@ public void thePriceOf(DataTable dt)
 			@When("I search about home By {string} Allow Pets")
 			public void iSearchAboutHomeByAllowPets(String pets) throws IOException, MessagingException {
 				string=pets;
+				  subject="Dear client this is the list of your pets spec";
     		  Result=S.byPets(pets);
 			}
 
@@ -428,6 +439,7 @@ public void thePriceOf(DataTable dt)
 				@When("I search about home By {int} Lease Length")
 				public void iSearchAboutHomeByLeaseLength(Integer lease) throws IOException, MessagingException {    
 					num=lease;
+					  subject="Dear client this is the list of your lease lenght spec";
 	    		     Result= S.byLeaseLength(lease);
 				}
 
@@ -497,10 +509,11 @@ public void thePriceOf(DataTable dt)
         	 multiamentie=string;
         	 multiplace=string2;
         	 multitype=string3;
-           	 ament=new ByAmentiesSpec(string);	
-           	 place=new ByPlacementSpec(string2);
-           	 type=new ByTypeSpec (string3);
-           	 Result=multi.cmp(ament,place,type);
+        	  subject="Dear client this is the list of your multiple spec";
+           	ament=new ByAmentiesSpec(string);	
+           	place=new ByPlacementSpec(string2);
+           	type=new ByTypeSpec (string3);
+           	Result=multi.cmp(ament,place,type);
            }
 
 
@@ -514,7 +527,16 @@ public void thePriceOf(DataTable dt)
            	assertTrue(r.getAmenties().equalsIgnoreCase(multiamentie));
         	assertTrue(r.getPlacement().equalsIgnoreCase(multiplace));
         	assertTrue(r.getType().equalsIgnoreCase(multitype));
-        	printRes(Result);
-}	
            }
-}
+           	printRes(Result);
+           }
+           
+           
+           
+           
+           @Then("The result should be sent to Email {string}")
+           public void email(String email) throws IOException, MessagingException {
+               S.sendE(subject,email,Result);
+           	verify(mockemailholder.getMockmail(),times(1)).sendEmail(subject,email, Result);
+           }
+}	

@@ -27,8 +27,8 @@ public class Search {
 	}
 	
 	
-	public void sendE(String email,List<Home>re) throws IOException, MessagingException  {
-		emailservice.sendEmail(email,re);
+	public void sendE(String subject,String email,List<Home>re) throws IOException, MessagingException {
+		emailservice.sendEmail(subject,email,re);
 	}
    
 	public List<Home> byplacement(String placement)  {

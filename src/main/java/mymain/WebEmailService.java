@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class WebEmailService {
-public void sendEmail(String to,List<Home> result2) throws IOException, MessagingException {
+public void sendEmail(String to,String sub, List<Home> result2) throws IOException, MessagingException {
 	
 	String from = "meera.gh.barakat@gmail.com";
 	
@@ -50,7 +50,7 @@ public void sendEmail(String to,List<Home> result2) throws IOException, Messagin
 
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-        message.setSubject("Dear client this is the list of your spec");
+        message.setSubject(sub);
 
         Multipart multipart = new MimeMultipart();
 
