@@ -38,7 +38,7 @@ public void sendEmail(String to,String sub, List<Home> result2) throws IOExcepti
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
 
-            return new PasswordAuthentication("meera.gh.barakat@gmail.com", "mysocial2000meera");
+            return new PasswordAuthentication("meera.gh.barakat@gmail.com", "mypass");
 
         }
 
